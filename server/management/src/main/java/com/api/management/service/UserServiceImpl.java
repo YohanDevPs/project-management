@@ -17,4 +17,9 @@ public class UserServiceImpl implements UserService{
     public List<User> fetchUserList() {
         return userRepository.findAll();
     }
+
+    @Override
+    public User fetchUser(Long id) {
+        return userRepository.findById(id).get();
+    }
 }

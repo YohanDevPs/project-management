@@ -7,14 +7,13 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
-    private int id;
+    private Long id;
     private String name;
     private String email;
     private int password;
 
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 

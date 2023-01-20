@@ -21,9 +21,9 @@ public class UserController {
         return userService.fetchUserList();
     }
 
-    @GetMapping("/{id}")
+    @PostMapping("/{name}/{password}")
     @ResponseStatus(HttpStatus.OK)
-    public User getUser(@PathVariable("id") Long id) {
-        return userService.fetchUser(id);
+    public User getUser(@PathVariable("name") String name, @PathVariable("password") String password) {
+        return userService.fetchUser(name, password);
     }
 }

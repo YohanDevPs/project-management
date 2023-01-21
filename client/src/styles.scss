@@ -10,10 +10,11 @@ body {
 }
 
 .form-container {
-  display: block;
+  top: 25%;
+  position: relative;
+  display: flexbox;
   max-width: 300px;
   margin: auto;
-
   background: #eceff1;
   padding: 48px;
   border-radius: 16px;

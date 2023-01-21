@@ -1,0 +1,29 @@
+<div class="form-container mat-elevation-z5">
+  <h1>Login</h1>
+  <form [formGroup]="loginForm">
+    <mat-form-field>
+      <input matInput placeholder="Usuário" formControlName="name" required />
+      <mat-error *ngIf="userName?.errors?.['required']">
+        Digite o usuário
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Senha"
+        formControlName="password"
+        type="password"
+      />
+      <mat-error *ngIf="userPassord?.errors?.['required']">
+        Digite a senha
+      </mat-error>
+    </mat-form-field>
+    <div class="center margin-top">
+      <button type="submit" mat-raised-button color="primary">Login</button>
+    </div>
+    <span class="center margin-top"
+      >New to our platform?
+      <a class="sign-up-link" routerLink="/sign-up">Sign up!</a></span
+    >
+  </form>
+</div>

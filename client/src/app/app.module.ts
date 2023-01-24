@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +26,7 @@ import { SignUpComponent } from './security/sign-up/sign-up.component';
     ReactiveFormsModule,
     MatButtonModule,
     MatInputModule,
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

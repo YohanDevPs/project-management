@@ -1,1 +1,38 @@
-<p>sign-up works!</p>
+<div class="container">
+  <div class="container__form mat-elevation-z5">
+    <h1>Novo Cadastro</h1>
+    <form [formGroup]="signUpForm">
+      <mat-form-field>
+        <input matInput placeholder="Usuário" formControlName="name" required />
+        <mat-error *ngIf="userName?.errors?.['required']">
+          Digite o usuário
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Email" formControlName="email" required />
+        <mat-error *ngIf="userEmail?.errors?.['required']">
+          Digite o email
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Senha"
+          formControlName="password"
+          type="password"
+        />
+        <mat-error *ngIf="userPassord?.errors?.['required']">
+          Digite a senha
+        </mat-error>
+      </mat-form-field>
+      <div class="actions">
+        <button routerLink="/login" mat-raised-button color="primary">
+          Voltar
+        </button>
+        <button type="submit" mat-raised-button color="primary">
+          Se inscrever
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

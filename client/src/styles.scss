@@ -8,20 +8,26 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-
-.form-container {
-  top: 25%;
-  position: relative;
-  display: flexbox;
-  max-width: 300px;
-  margin: auto;
-  background: #eceff1;
-  padding: 48px;
-  border-radius: 16px;
-}
-
-.form-container mat-form-field {
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
+  height: 100%;
+
+  &__form {
+    position: relative;
+    max-width: 300px;
+    margin: auto;
+    background: #eceff1;
+    padding: 48px;
+    border-radius: 16px;
+    width: 100%;
+    
+    mat-form-field {
+      width: 100%;
+    }
+  }
 }
 
 .center {

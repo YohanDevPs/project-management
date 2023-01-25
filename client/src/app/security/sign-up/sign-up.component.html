@@ -4,27 +4,41 @@
     <form [formGroup]="signUpForm">
       <mat-form-field>
         <input matInput placeholder="Usuário" formControlName="name" required />
-        <mat-error *ngIf="userName?.errors?.['required']">
+        <mat-error *ngIf="name?.errors?.['required']">
           Digite o usuário
         </mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="Email" formControlName="email" required />
-        <mat-error *ngIf="userEmail?.errors?.['required']">
+        <mat-error *ngIf="email?.errors?.['required']">
           Digite o email
         </mat-error>
       </mat-form-field>
       <mat-form-field>
         <input
           matInput
-          placeholder="Senha"
-          formControlName="password"
           type="password"
+          placeholder="Password"
+          formControlName="password"
         />
-        <mat-error *ngIf="userPassord?.errors?.['required']">
-          Digite a senha
+        <mat-error *ngIf="password?.errors?.['required']">
+          Password is required
         </mat-error>
       </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          type="password"
+          placeholder="Confirm Password"
+          formControlName="confirmPassword"
+        />
+        <mat-error *ngIf="confirmPassword?.errors?.['required']">
+          Confirmar senha
+        </mat-error>
+      </mat-form-field>
+      <mat-error *ngIf="signUpForm.errors?.['passwordsDontMatch']">
+        Senhas devem ser iguais
+      </mat-error>
       <div class="actions">
         <button routerLink="/login" mat-raised-button color="primary">
           Voltar

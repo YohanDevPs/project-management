@@ -21,9 +21,15 @@ public class UserController {
         return userService.fetchUserList();
     }
 
-    @PostMapping("/{name}/{password}")
+    @GetMapping("/login")
     @ResponseStatus(HttpStatus.OK)
-    public User getUser(@PathVariable("name") String name, @PathVariable("password") String password) {
-        return userService.fetchUser(name, password);
+    public User getUser(@RequestBody User user) {
+        return userService.findEmailOrPassword(user);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createUser(@RequestBody User user) {
+        userService.saveUser(user);
     }
 }

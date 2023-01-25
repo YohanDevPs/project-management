@@ -1,6 +1,7 @@
 package com.example.server.registration;
 
 import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,6 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class RegistrationController {
 
+    private RegistrationSevice registrationSevice;
 
+    public String register(@RequestBody RegistrationRequest request) {
+        return  registrationSevice.register(request);
+    }
 
 }

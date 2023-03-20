@@ -1,16 +1,16 @@
-package com.api.management.service;
+package com.api.management.service.user;
 
 import com.api.management.exception.UserNotFoundExeption;
 import com.api.management.model.User;
 import com.api.management.repository.UserRepository;
+import com.api.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;

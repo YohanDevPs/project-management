@@ -1,4 +1,4 @@
-package com.api.management.service;
+package com.api.management.service.user;
 
 import com.api.management.model.User;
 

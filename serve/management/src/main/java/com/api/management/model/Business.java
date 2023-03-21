@@ -1,13 +1,13 @@
 package com.api.management.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.api.management.enums.BusinessType;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Business {
@@ -15,19 +15,29 @@ public class Business {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank
-    private Date dateSale;
-    @NotBlank
-    private BigDecimal price;
-    private BigDecimal profit;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "business_type", nullable = false)
+    private BusinessType businessType;
+
+    @Column(name = "value")
+    private BigDecimal value;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
+    @OneToMany(mappedBy = "business", cascade = CascadeType.ALL)
+    private Set<Product> products = new HashSet<>();
 
     public Business() {
     }
 
-    public Business(Date dateSale, BigDecimal price, BigDecimal profit) {
-        this.dateSale = dateSale;
-        this.price = price;
-        this.profit = profit;
+    public Business(BusinessType businessType, BigDecimal value, Customer customer, Set<Product> products) {
+        this.businessType = businessType;
+        this.value = value;
+        this.customer = customer;
+        this.products = products;
     }
 
     public Long getId() {
@@ -38,27 +48,35 @@ public class Business {
         this.id = id;
     }
 
-    public Date getDateSale() {
-        return dateSale;
+    public BusinessType getBusinessType() {
+        return businessType;
     }
 
-    public void setDateSale(Date dateSale) {
-        this.dateSale = dateSale;
+    public void setBusinessType(BusinessType businessType) {
+        this.businessType = businessType;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public BigDecimal getValue() {
+        return value;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setValue(BigDecimal value) {
+        this.value = value;
     }
 
-    public BigDecimal getProfit() {
-        return profit;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setProfit(BigDecimal profit) {
-        this.profit = profit;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 }

@@ -1,13 +1,9 @@
 package com.api.management.model;
 
-import com.api.management.enums.PaymentStatus;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.*;
 
-import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Customer {
@@ -15,21 +11,36 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank
-    private String name;
-    @NotBlank
-    private long contact;
-    private Date lastPurchase;
-    private PaymentStatus paymenteStatus;
-    private Boolean potencialResale;
 
-    public Customer(Long id, String name, long contact, Date lastPurchase, PaymentStatus paymenteStatus, Boolean potencialResale) {
-        this.id = id;
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
+
+    @Column(name = "phone")
+    private String phone;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private Set<Address> addresses = new HashSet<>();
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private Set<Business> businesses = new HashSet<>();
+
+    public Customer() {
+    }
+
+    public Customer(String name, String email, String phone, User user, Set<Address> addresses, Set<Business> businesses) {
         this.name = name;
-        this.contact = contact;
-        this.lastPurchase = lastPurchase;
-        this.paymenteStatus = paymenteStatus;
-        this.potencialResale = potencialResale;
+        this.email = email;
+        this.phone = phone;
+        this.user = user;
+        this.addresses = addresses;
+        this.businesses = businesses;
     }
 
     public Long getId() {
@@ -48,35 +59,43 @@ public class Customer {
         this.name = name;
     }
 
-    public long getContact() {
-        return contact;
+    public String getEmail() {
+        return email;
     }
 
-    public void setContact(long contact) {
-        this.contact = contact;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public Date getLastPurchase() {
-        return lastPurchase;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setLastPurchase(Date lastPurchase) {
-        this.lastPurchase = lastPurchase;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public PaymentStatus getPaymenteStatus() {
-        return paymenteStatus;
+    public User getUser() {
+        return user;
     }
 
-    public void setPaymenteStatus(PaymentStatus paymenteStatus) {
-        this.paymenteStatus = paymenteStatus;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Boolean getPotencialResale() {
-        return potencialResale;
+    public Set<Address> getAddresses() {
+        return addresses;
     }
 
-    public void setPotencialResale(Boolean potencialResale) {
-        this.potencialResale = potencialResale;
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
+    }
+
+    public Set<Business> getBusinesses() {
+        return businesses;
+    }
+
+    public void setBusinesses(Set<Business> businesses) {
+        this.businesses = businesses;
     }
 }

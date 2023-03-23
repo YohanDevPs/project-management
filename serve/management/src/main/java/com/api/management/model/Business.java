@@ -4,40 +4,41 @@ import com.api.management.enums.BusinessType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "tab_business")
 public class Business {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Enumerated(EnumType.STRING)
+    @NotBlank(message = "businessType cannot be null" )
     @Column(name = "business_type", nullable = false)
     private BusinessType businessType;
-
-    @Column(name = "value")
-    private BigDecimal value;
-
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
-
+    @ManyToOne
+    @JoinColumn(name = "suplier_id")
+    private Supplier supplier;
     @OneToMany(mappedBy = "business", cascade = CascadeType.ALL)
-    private Set<Product> products = new HashSet<>();
+    private Set<Order> orders = new HashSet<>();
 
     public Business() {
     }
 
-    public Business(BusinessType businessType, BigDecimal value, Customer customer, Set<Product> products) {
+    public Business(BusinessType businessType, Customer customer, Supplier supplier) {
         this.businessType = businessType;
-        this.value = value;
-        this.customer = customer;
-        this.products = products;
+        if(businessType == BusinessType.SALE) {
+            this.customer = customer;
+            this.supplier = null;
+        } else {
+            this.supplier = supplier;
+            this.customer = null;
+        }
     }
 
     public Long getId() {
@@ -55,15 +56,7 @@ public class Business {
     public void setBusinessType(BusinessType businessType) {
         this.businessType = businessType;
     }
-
-    public BigDecimal getValue() {
-        return value;
-    }
-
-    public void setValue(BigDecimal value) {
-        this.value = value;
-    }
-
+    
     public Customer getCustomer() {
         return customer;
     }
@@ -72,11 +65,19 @@ public class Business {
         this.customer = customer;
     }
 
-    public Set<Product> getProducts() {
-        return products;
+    public Supplier getSupplier() {
+        return supplier;
     }
 
-    public void setProducts(Set<Product> products) {
-        this.products = products;
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 }

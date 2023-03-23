@@ -1,33 +1,26 @@
 package com.api.management.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
+@Table(name = "tab_address")
 public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "street", nullable = false)
     private String street;
-
     @Column(name = "number", nullable = false)
     private Integer number;
-
     @Column(name = "complement")
     private String complement;
-
     @Column(name = "city", nullable = false)
     private String city;
-
     @Column(name = "state", nullable = false)
     private String state;
-
     @Column(name = "zipcode", nullable = false)
     private String zipcode;
-
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;

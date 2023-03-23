@@ -8,6 +8,7 @@ public interface UserService {
 
     List<User> fetchUserList();
     User fetchUser(String name, String password);
+    User findById(Long userId);
 
     User findByEmail(String email);
 

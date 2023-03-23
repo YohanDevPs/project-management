@@ -26,6 +26,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findById(Long userId) {
+        return userRepository.getReferenceById(userId);
+    }
+
+    @Override
     public User findByEmail(String email) {
         return null;
     }

@@ -1,4 +1,4 @@
-package com.api.management.controller;
+package com.api.management.controller.business;
 
 import com.api.management.model.Supplier;
 import com.api.management.service.supplier.SupplierService;

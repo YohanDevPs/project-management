@@ -1,4 +1,4 @@
-package com.api.management.controller;
+package com.api.management.controller.business;
 
 import com.api.management.model.Product;
 import com.api.management.service.product.ProductSevice;
@@ -15,11 +15,11 @@ public class ProductController {
     @Autowired
     private ProductSevice productSevice;
 
-    @GetMapping("/business/{businessId}")
-    @ResponseStatus(HttpStatus.OK)
-    public Set<Product> getProductByBusinessId(@PathVariable("businessId") Long businessId) {
-        return productSevice.findProductSetByBusinessId(businessId);
-    }
+//    @GetMapping("/business/{businessId}")
+//    @ResponseStatus(HttpStatus.OK)
+//    public Set<Product> getProductByBusinessId(@PathVariable("businessId") Long businessId) {
+//        return productSevice.findProductSetByBusinessId(businessId);
+//    }
 
     @GetMapping("/{productId}")
     @ResponseStatus(HttpStatus.OK)

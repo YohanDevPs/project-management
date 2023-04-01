@@ -18,10 +18,10 @@ public class ProductServiceImpl implements ProductSevice {
         return productRepository.findById(productId).get();
     }
 
-    @Override
-    public Set<Product> findProductSetByBusinessId(Long businessId) {
-        return productRepository.findByBusinessId(businessId);
-    }
+//    @Override
+//    public Set<Product> findProductSetByBusinessId(Long businessId) {
+//        return productRepository.findByBusinessId(businessId);
+//    }
 
     @Override
     public void saveProduct(Product product) {

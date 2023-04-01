@@ -1,4 +1,4 @@
-package com.api.management.controller;
+package com.api.management.controller.business;
 
 import com.api.management.model.Customer;
 import com.api.management.service.customer.CustomerService;

@@ -9,7 +9,7 @@ import java.util.Set;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    Set<Product> findByBusinessId(Long productId);
+//    Set<Product> findByBusinessId(Long productId);
 }
 
 

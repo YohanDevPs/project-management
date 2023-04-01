@@ -29,19 +29,20 @@ public class Customer {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<Address> addresses = new HashSet<>();
 
+
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private Set<Business> businesses = new HashSet<>();
+    private Set<Sale> sales = new HashSet<>();
 
     public Customer() {
     }
 
-    public Customer(String name, String email, String phone, User user, Set<Address> addresses, Set<Business> businesses) {
+    public Customer(String name, String email, String phone, User user, Set<Address> addresses, Set<Sale> sales) {
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.user = user;
         this.addresses = addresses;
-        this.businesses = businesses;
+        this.sales = sales;
     }
 
     public Long getId() {
@@ -92,11 +93,11 @@ public class Customer {
         this.addresses = addresses;
     }
 
-    public Set<Business> getBusinesses() {
-        return businesses;
+    public Set<Sale> getSales() {
+        return sales;
     }
 
-    public void setBusinesses(Set<Business> businesses) {
-        this.businesses = businesses;
+    public void setSales(Set<Sale> sales) {
+        this.sales = sales;
     }
 }

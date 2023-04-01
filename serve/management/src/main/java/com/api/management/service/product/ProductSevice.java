@@ -7,7 +7,7 @@ import java.util.Set;
 public interface ProductSevice {
 
     Product findProductById(Long productId);
-    Set<Product> findProductSetByBusinessId(Long businessId);
+//    Set<Product> findProductSetByBusinessId(Long businessId);
     void saveProduct(Product product);
     Product updateProduct(Long productId, Product product);
     void deleteProductById(Long businessId);

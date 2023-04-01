@@ -16,19 +16,16 @@ public class Product {
     @Column(name = "description")
     private String description;
     @ManyToOne
-    @JoinColumn(name = "business_id")
-    private Business business;
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
+    @JoinColumn(name = "sale_id")
+    private Sale sale;
 
     public Product() {
     }
 
-    public Product(String name, String description, Business business) {
+    public Product(String name, String description, Sale sale) {
         this.name = name;
         this.description = description;
-        this.business = business;
+        this.sale = sale;
     }
 
     public Long getId() {
@@ -55,19 +52,11 @@ public class Product {
         this.description = description;
     }
 
-    public Business getBusiness() {
-        return business;
+    public Sale getSale() {
+        return sale;
     }
 
-    public void setBusiness(Business business) {
-        this.business = business;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setSale(Sale sale) {
+        this.sale = sale;
     }
 }

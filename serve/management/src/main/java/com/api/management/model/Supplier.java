@@ -15,7 +15,6 @@ public class Supplier {
     private String phone;
     @Column(name = "complement", nullable = false)
     private String complement;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

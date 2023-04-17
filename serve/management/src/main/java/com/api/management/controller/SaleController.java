@@ -1,6 +1,5 @@
-package com.api.management.controller.business;
+package com.api.management.controller;
 
-import com.api.management.model.Product;
 import com.api.management.model.Sale;
 import com.api.management.service.sale.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;

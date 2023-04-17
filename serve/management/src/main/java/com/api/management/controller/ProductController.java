@@ -1,4 +1,4 @@
-package com.api.management.controller.business;
+package com.api.management.controller;
 
 import com.api.management.model.Product;
 import com.api.management.service.product.ProductSevice;
@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
 
 @RestController
 @RequestMapping("/product")

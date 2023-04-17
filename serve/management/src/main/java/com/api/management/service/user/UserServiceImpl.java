@@ -1,13 +1,16 @@
 package com.api.management.service.user;
 
+import com.api.management.dto.UserDTO;
 import com.api.management.exception.UserNotFoundExeption;
 import com.api.management.model.User;
 import com.api.management.repository.UserRepository;
-import com.api.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static com.api.management.mapper.UtilModelMapper.parseListObjects;
+import static com.api.management.mapper.UtilModelMapper.parseObject;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -16,45 +19,24 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public List<User> fetchUserList() {
-        return userRepository.findAll();
+    public List<UserDTO> findAll() {
+        var entities = userRepository.findAll();
+
+        return parseListObjects(entities, UserDTO.class);
     }
 
     @Override
-    public User fetchUser(String name, String password) {
-        return null;
+    public UserDTO findById(Long userId) {
+        var entity = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundExeption("Senha ou usuário em branco"));
+        return parseObject(entity, UserDTO.class);
     }
 
     @Override
-    public User findById(Long userId) {
-        return userRepository.getReferenceById(userId);
-    }
-
-    @Override
-    public User findByEmail(String email) {
-        return null;
-    }
-
-
-    @Override
-    public User findEmailOrPassword(User user) {
-        if(user.getPassword() == null || user.getName() == null) {
-            throw new UserNotFoundExeption("Senha ou usuário em branco");
-        }
-
-        User fetchUser = userRepository.findUserByNameAndPassword(user.getName() , user.getPassword());
-        if(fetchUser == null) {
-            throw new UserNotFoundExeption("Usuário não encontrado");
-        }
-
-        return fetchUser;
-    }
-
-    @Override
-    public void saveUser(User user) {
-        if(user.getEmail() == null || user.getPassword() == null || user.getName() == null) {
+    public void create(UserDTO dto) {
+        if(dto.getEmail() == null || dto.getPassword() == null || dto.getName() == null) {
             throw new RuntimeException();
         }
-        userRepository.save(user);
+        userRepository.save(parseObject(dto, User.class));
     }
 }

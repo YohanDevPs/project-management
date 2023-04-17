@@ -14,7 +14,7 @@ public class User {
     private String name;
     @Column(name = "email", nullable = false, unique = true)
     private String email;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Column(nullable = false)
     private String password;
 
     public User() {

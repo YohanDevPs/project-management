@@ -1,7 +1,6 @@
 package com.api.management.service.user;
 
 import com.api.management.dto.UserDTO;
-import com.api.management.model.User;
 
 import java.util.List;
 

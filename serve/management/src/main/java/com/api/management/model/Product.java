@@ -2,8 +2,6 @@ package com.api.management.model;
 
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
-
 @Entity
 @Table(name = "tab_product")
 public class Product {

@@ -12,37 +12,21 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "name", nullable = false)
     private String name;
-
     @Column(name = "email", nullable = false, unique = true)
     private String email;
-
     @Column(name = "phone")
     private String phone;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<Address> addresses = new HashSet<>();
-
-
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<Sale> sales = new HashSet<>();
 
     public Customer() {
-    }
-
-    public Customer(String name, String email, String phone, User user, Set<Address> addresses, Set<Sale> sales) {
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.user = user;
-        this.addresses = addresses;
-        this.sales = sales;
     }
 
     public Long getId() {

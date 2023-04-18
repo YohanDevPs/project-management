@@ -1,14 +1,14 @@
 package com.api.management.service.customer;
 
-import com.api.management.model.Customer;
+import com.api.management.dto.CustomerDTO;
 
-import java.util.Set;
+import java.util.List;
 
 public interface CustomerService {
 
-    Customer findCustomerById(Long id);
-    Set<Customer> findCustomerSetByUserId(Long userId);
-    void saveCustomer(Customer customer);
-    Customer updateCustomer(Long customerId);
-    void deleteCustomerById(Long customerId);
+    CustomerDTO findCustomerById(Long id);
+    List<CustomerDTO> findCustomerSetByUserId(Long userId);
+    CustomerDTO saveCustomer(Long idUser, CustomerDTO dto);
+    CustomerDTO update(CustomerDTO dto);
+    void deleteByCustomerId(Long customerId);
 }

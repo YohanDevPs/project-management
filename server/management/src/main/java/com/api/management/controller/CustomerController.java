@@ -1,12 +1,12 @@
 package com.api.management.controller;
 
-import com.api.management.model.Customer;
+import com.api.management.dto.CustomerDTO;
 import com.api.management.service.customer.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
+import java.util.List;
 
 @RestController
 @RequestMapping("/customer")
@@ -17,25 +17,31 @@ public class CustomerController {
 
     @GetMapping("/allByUser/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    public Set<Customer> getCustomersByUserId(@PathVariable("userId") Long userId) {
+    public List<CustomerDTO> getCustomersByUserId(@PathVariable("userId") Long userId) {
         return customerService.findCustomerSetByUserId(userId);
     }
 
-    @GetMapping("/{customerId}")
+    @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Customer getCustomerById(@PathVariable("customerId") Long customerId) {
-        return customerService.findCustomerById(customerId);
+    public CustomerDTO getCustomerById(@PathVariable("id") Long id) {
+        return customerService.findCustomerById(id);
     }
 
-    @DeleteMapping("/{customerId}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteCustomerById(@PathVariable("customerId") Long customerId) {
-        customerService.deleteCustomerById(customerId);
+    public void deleteById(@PathVariable("id") Long id) {
+        customerService.deleteByCustomerId(id);
     }
 
-    @PostMapping
+    @PostMapping("/{userId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveCustomer(@RequestBody Customer Customer) {
-        customerService.saveCustomer(Customer);
+    public CustomerDTO create(@PathVariable("userId") Long userId, @RequestBody CustomerDTO dto) {
+        return customerService.saveCustomer(userId, dto);
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    public CustomerDTO update(@RequestBody CustomerDTO dto) {
+        return customerService.update(dto);
     }
 }

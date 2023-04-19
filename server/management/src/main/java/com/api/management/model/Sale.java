@@ -1,5 +1,6 @@
 package com.api.management.model;
 
+import com.api.management.enums.DeliveryStatus;
 import com.api.management.enums.PaymentStatus;
 import jakarta.persistence.*;
 
@@ -15,6 +16,8 @@ public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "delivery_status", nullable = false)
+    private DeliveryStatus deliveryStatus;
     @Column(name = "payment_status", nullable = false)
     private PaymentStatus paymentStatus;
     @Column(nullable = false)
@@ -36,6 +39,14 @@ public class Sale {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public DeliveryStatus getDeliveryStatus() {
+        return deliveryStatus;
+    }
+
+    public void setDeliveryStatus(DeliveryStatus deliveryStatus) {
+        this.deliveryStatus = deliveryStatus;
     }
 
     public PaymentStatus getPaymentStatus() {

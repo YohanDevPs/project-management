@@ -1,6 +1,6 @@
 package com.api.management.enums;
 
-public enum PricingType {
+public enum UnitType {
 
     UNIT, WEIGHT
 }

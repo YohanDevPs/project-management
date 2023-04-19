@@ -1,5 +1,6 @@
 package com.api.management.model;
 
+import com.api.management.enums.UnitType;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -16,7 +17,7 @@ public class Product {
     @Column(name = "description")
     private String description;
     @Column(name = "unit_type")
-    private BigDecimal unitType;
+    private UnitType unitType;
     @Column(name = "amount")
     private BigDecimal amount;
     @Column(name = "unit_value")
@@ -57,11 +58,11 @@ public class Product {
         this.description = description;
     }
 
-    public BigDecimal getUnitType() {
+    public UnitType getUnitType() {
         return unitType;
     }
 
-    public void setUnitType(BigDecimal unitType) {
+    public void setUnitType(UnitType unitType) {
         this.unitType = unitType;
     }
 

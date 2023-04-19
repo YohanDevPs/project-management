@@ -4,7 +4,10 @@ import com.api.management.model.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface AdressRepository extends JpaRepository<Address, Long> {
+import java.util.Set;
 
+@Repository
+public interface AddressRepository extends JpaRepository<Address, Long> {
+
+    Set<Address> findByCustomerId(Long userId);
 }

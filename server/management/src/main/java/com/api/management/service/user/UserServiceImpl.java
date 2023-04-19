@@ -1,7 +1,7 @@
 package com.api.management.service.user;
 
 import com.api.management.dto.UserDTO;
-import com.api.management.exception.UserNotFoundExeption;
+import com.api.management.exception.UserNotFoundException;
 import com.api.management.model.User;
 import com.api.management.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO findById(Long userId) {
         var entity = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundExeption("Senha ou usuário em branco"));
+                .orElseThrow(() -> new UserNotFoundException("Senha ou usuário em branco"));
         return parseObject(entity, UserDTO.class);
     }
 

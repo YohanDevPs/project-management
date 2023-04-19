@@ -1,7 +1,7 @@
 package com.api.management.service.customer;
 
 import com.api.management.dto.CustomerDTO;
-import com.api.management.exception.UserNotFoundExeption;
+import com.api.management.exception.UserNotFoundException;
 import com.api.management.model.Customer;
 import com.api.management.repository.CustomerRepository;
 import com.api.management.repository.UserRepository;
@@ -29,7 +29,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDTO findCustomerById(Long id) {
         var entity = customerRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundExeption(String.format(CUSTOMER_NOT_FOUND, id)));
+                .orElseThrow(() -> new UserNotFoundException(String.format(CUSTOMER_NOT_FOUND, id)));
 
         return parseObject(entity, CustomerDTO.class);
     }
@@ -42,7 +42,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDTO saveCustomer(Long idUser, CustomerDTO dto) {
         var userEntity = userRepository.findById(idUser)
-                .orElseThrow(() -> new UserNotFoundExeption(String.format(USER_NOT_FOUND, idUser)));
+                .orElseThrow(() -> new UserNotFoundException(String.format(USER_NOT_FOUND, idUser)));
 
         var customerEntity = parseObject(dto, Customer.class);
         customerEntity.setUser(userEntity);
@@ -53,7 +53,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDTO update(CustomerDTO dto) {
         var entity = customerRepository.findById(dto.getId())
-                .orElseThrow(() -> new UserNotFoundExeption(String.format(CUSTOMER_NOT_FOUND, dto.getId())));
+                .orElseThrow(() -> new UserNotFoundException(String.format(CUSTOMER_NOT_FOUND, dto.getId())));
 
         entity.setName(dto.getName());
         entity.setEmail(dto.getEmail());
@@ -65,7 +65,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void deleteByCustomerId(Long id) {
         var entity = customerRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundExeption(String.format(CUSTOMER_NOT_FOUND, id)));
+                .orElseThrow(() -> new UserNotFoundException(String.format(CUSTOMER_NOT_FOUND, id)));
 
         customerRepository.delete(entity);
     }

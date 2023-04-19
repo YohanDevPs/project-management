@@ -2,6 +2,9 @@ package com.api.management.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "tab_supplier")
 public class Supplier {
@@ -18,15 +21,10 @@ public class Supplier {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+    @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
+    private List<Replenishment> replenishments = new ArrayList<>();
 
     public Supplier() {
-    }
-
-    public Supplier(String name, String phone, String complement, User user) {
-        this.name = name;
-        this.phone = phone;
-        this.complement = complement;
-        this.user = user;
     }
 
     public Long getId() {
@@ -67,5 +65,13 @@ public class Supplier {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Replenishment> getReplenishments() {
+        return replenishments;
+    }
+
+    public void setReplenishments(List<Replenishment> replenishments) {
+        this.replenishments = replenishments;
     }
 }

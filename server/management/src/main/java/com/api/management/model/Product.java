@@ -2,6 +2,8 @@ package com.api.management.model;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "tab_product")
 public class Product {
@@ -13,17 +15,22 @@ public class Product {
     private String name;
     @Column(name = "description")
     private String description;
+    @Column(name = "unit_type")
+    private BigDecimal unitType;
+    @Column(name = "amount")
+    private BigDecimal amount;
+    @Column(name = "unit_value")
+    private BigDecimal unitValue;
+    @Column(name = "total_price")
+    private BigDecimal totalPrice;
     @ManyToOne
     @JoinColumn(name = "sale_id")
     private Sale sale;
+    @ManyToOne
+    @JoinColumn(name = "replenishment_id")
+    private Replenishment replenishment;
 
     public Product() {
-    }
-
-    public Product(String name, String description, Sale sale) {
-        this.name = name;
-        this.description = description;
-        this.sale = sale;
     }
 
     public Long getId() {
@@ -50,11 +57,64 @@ public class Product {
         this.description = description;
     }
 
+    public BigDecimal getUnitType() {
+        return unitType;
+    }
+
+    public void setUnitType(BigDecimal unitType) {
+        this.unitType = unitType;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public BigDecimal getUnitValue() {
+        return unitValue;
+    }
+
+    public void setUnitValue(BigDecimal unitValue) {
+        this.unitValue = unitValue;
+    }
+
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
     public Sale getSale() {
         return sale;
     }
 
     public void setSale(Sale sale) {
         this.sale = sale;
+    }
+
+    public Replenishment getReplenishment() {
+        return replenishment;
+    }
+
+    public void setReplenishment(Replenishment replenishment) {
+        this.replenishment = replenishment;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product product)) return false;
+
+        return getId() != null ? getId().equals(product.getId()) : product.getId() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return getId() != null ? getId().hashCode() : 0;
     }
 }

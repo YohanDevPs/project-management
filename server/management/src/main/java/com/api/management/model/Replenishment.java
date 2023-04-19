@@ -9,8 +9,8 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "tab_sales")
-public class Sale {
+@Table(name = "tab_replenishment")
+public class Replenishment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,14 +20,14 @@ public class Sale {
     @Column(nullable = false)
     private Date moment;
     @Column(name = "total_price")
-    private BigDecimal totalPrice;
-    @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL)
+    private BigDecimal total_price;
+    @OneToMany(mappedBy = "replenishment", cascade = CascadeType.ALL)
     private List<Product> products = new ArrayList<>();
     @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    @JoinColumn(name = "supplier_id")
+    private Supplier supplier;
 
-    public Sale() {
+    public Replenishment() {
     }
 
     public Long getId() {
@@ -54,12 +54,12 @@ public class Sale {
         this.moment = moment;
     }
 
-    public BigDecimal getTotalPrice() {
-        return totalPrice;
+    public BigDecimal getTotal_price() {
+        return total_price;
     }
 
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setTotal_price(BigDecimal total_price) {
+        this.total_price = total_price;
     }
 
     public List<Product> getProducts() {
@@ -70,20 +70,20 @@ public class Sale {
         this.products = products;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Supplier getSupplier() {
+        return supplier;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Sale sale)) return false;
+        if (!(o instanceof Replenishment that)) return false;
 
-        return getId() != null ? getId().equals(sale.getId()) : sale.getId() == null;
+        return getId() != null ? getId().equals(that.getId()) : that.getId() == null;
     }
 
     @Override

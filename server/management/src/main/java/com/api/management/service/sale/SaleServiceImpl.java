@@ -34,17 +34,17 @@ public class SaleServiceImpl implements SaleService{
     public Sale update(Sale sale) {
         var entity = saleRepository.findById(sale.getId())
                 .orElseThrow(NoSuchElementException::new);
-
-        entity.setPricing_type(sale.getPricing_type());
-        entity.setPaymentStatus(sale.getPaymentStatus());
-        entity.setMoment(sale.getMoment());
-        entity.setUnit_price(sale.getUnit_price());
-        entity.setQuantity(sale.getQuantity());
-        entity.setWeight_price(sale.getWeight_price());
-        entity.setWeight(sale.getWeight());
-        entity.setTotal_price(sale.getTotal_price());
-        entity.setProducts(sale.getProducts());
-        entity.setCustomer(sale.getCustomer());
+//
+//        entity.setPricing_type(sale.getPricing_type());
+//        entity.setPaymentStatus(sale.getPaymentStatus());
+//        entity.setMoment(sale.getMoment());
+//        entity.setUnit_price(sale.getUnit_price());
+//        entity.setQuantity(sale.getQuantity());
+//        entity.setWeight_price(sale.getWeight_price());
+//        entity.setWeight(sale.getWeight());
+//        entity.setTotal_price(sale.getTotal_price());
+//        entity.setProducts(sale.getProducts());
+//        entity.setCustomer(sale.getCustomer());
 
         return entity;
     }

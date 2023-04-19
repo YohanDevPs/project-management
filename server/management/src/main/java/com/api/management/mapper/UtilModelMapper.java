@@ -3,8 +3,9 @@ package com.api.management.mapper;
 import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class UtilModelMapper {
 
@@ -14,8 +15,16 @@ public class UtilModelMapper {
         return mapper.map(origin, destination);
     }
 
-    public static <O, D> List<D> parseListObjects(Collection<O> origin, Class<D> destination) {
+    public static <O, D> List<D> parseListObjects(List<O> origin, Class<D> destination) {
         List<D> destinationObjects = new ArrayList<>();
+        for (O o: origin) {
+            destinationObjects.add(mapper.map(o, destination));
+        }
+        return destinationObjects;
+    }
+
+    public static <O, D> Set<D> parseSetObjects(Set<O> origin, Class<D> destination) {
+        Set<D> destinationObjects = new HashSet<>();
         for (O o: origin) {
             destinationObjects.add(mapper.map(o, destination));
         }

@@ -1,6 +1,6 @@
 package com.api.management.controller;
 
-import com.api.management.model.Supplier;
+import com.api.management.dto.SupplierDTO;
 import com.api.management.service.supplier.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,25 +17,31 @@ public class SupplierController {
 
     @GetMapping("/allByUser/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Set<Supplier> getSupplierByUserId(@PathVariable("id") Long id) {
+    public Set<SupplierDTO> findByUserId(@PathVariable("id") Long id) {
         return supplierService.findSupplierSetByUserId(id);
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Supplier getSupplierById(@PathVariable("id") Long id) {
-        return supplierService.findSupplierById(id);
+    public SupplierDTO findById(@PathVariable("id") Long id) {
+        return supplierService.findById(id);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteSupplierById(@PathVariable("id") Long id) {
-        supplierService.deleteSupplierById(id);
+    public void delete(@PathVariable("id") Long id) {
+        supplierService.delete(id);
     }
 
-    @PostMapping
+    @PostMapping("/user/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveSupplier(@RequestBody Supplier supplier) {
-        supplierService.saveSupplier(supplier);
+    public SupplierDTO create(@PathVariable("id") Long id, @RequestBody SupplierDTO dto) {
+        return supplierService.create(id, dto);
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    public SupplierDTO update(@RequestBody SupplierDTO dto) {
+        return supplierService.update(dto);
     }
 }

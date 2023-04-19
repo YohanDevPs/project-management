@@ -1,4 +1,4 @@
-package com.api.management.service.adress;
+package com.api.management.service.address;
 
 import com.api.management.dto.AddressDTO;
 import com.api.management.exception.ResourceNotFoundException;
@@ -9,10 +9,10 @@ import com.api.management.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Set;
 
-import static com.api.management.mapper.UtilModelMapper.parseListObjects;
 import static com.api.management.mapper.UtilModelMapper.parseObject;
+import static com.api.management.mapper.UtilModelMapper.parseSetObjects;
 
 @Service
 public class AddressServiceImpl implements AddressService {
@@ -31,8 +31,8 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public List<AddressDTO> findAddressSetByCustomerId(Long customerId) {
-        return parseListObjects(repository.findByCustomerId(customerId), AddressDTO.class);
+    public Set<AddressDTO> findAddressSetByCustomerId(Long customerId) {
+        return parseSetObjects(repository.findByCustomerId(customerId), AddressDTO.class);
     }
 
     @Override

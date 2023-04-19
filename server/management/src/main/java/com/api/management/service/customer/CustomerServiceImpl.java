@@ -9,10 +9,10 @@ import com.api.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Set;
 
-import static com.api.management.mapper.UtilModelMapper.parseListObjects;
 import static com.api.management.mapper.UtilModelMapper.parseObject;
+import static com.api.management.mapper.UtilModelMapper.parseSetObjects;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -35,12 +35,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<CustomerDTO> findCustomerSetByUserId(Long userId) {
-        return parseListObjects(customerRepository.findByUserId(userId), CustomerDTO.class);
+    public Set<CustomerDTO> findCustomerSetByUserId(Long userId) {
+        return parseSetObjects(customerRepository.findByUserId(userId), CustomerDTO.class);
     }
 
     @Override
-    public CustomerDTO saveCustomer(Long idUser, CustomerDTO dto) {
+    public CustomerDTO create(Long idUser, CustomerDTO dto) {
         var userEntity = userRepository.findById(idUser)
                 .orElseThrow(() -> new UserNotFoundException(String.format(USER_NOT_FOUND, idUser)));
 

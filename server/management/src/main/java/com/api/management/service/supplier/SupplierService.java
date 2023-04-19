@@ -1,13 +1,14 @@
 package com.api.management.service.supplier;
 
-import com.api.management.model.Supplier;
+import com.api.management.dto.SupplierDTO;
 
 import java.util.Set;
 
 public interface SupplierService {
-    Supplier findSupplierById(Long orderId);
-    Set<Supplier> findSupplierSetByUserId(Long userId);
-    void saveSupplier(Supplier order);
-    Supplier updateSupplier(Long orderId);
-    void deleteSupplierById(Long orderId);
+
+    SupplierDTO findById(Long orderId);
+    Set<SupplierDTO> findSupplierSetByUserId(Long userId);
+    SupplierDTO create(Long userId, SupplierDTO dto);
+    SupplierDTO update(SupplierDTO dto);
+    void delete(Long orderId);
 }

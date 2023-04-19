@@ -13,7 +13,7 @@ public class Supplier {
     private String name;
     @Column(name = "phone", nullable = false)
     private String phone;
-    @Column(name = "complement", nullable = false)
+    @Column(name = "complement")
     private String complement;
     @ManyToOne
     @JoinColumn(name = "user_id")

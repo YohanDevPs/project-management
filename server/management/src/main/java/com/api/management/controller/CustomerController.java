@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/customer")
@@ -17,7 +17,7 @@ public class CustomerController {
 
     @GetMapping("/allByUser/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    public List<CustomerDTO> getCustomersByUserId(@PathVariable("userId") Long userId) {
+    public Set<CustomerDTO> getCustomersByUserId(@PathVariable("userId") Long userId) {
         return customerService.findCustomerSetByUserId(userId);
     }
 
@@ -36,7 +36,7 @@ public class CustomerController {
     @PostMapping("/{userId}")
     @ResponseStatus(HttpStatus.CREATED)
     public CustomerDTO create(@PathVariable("userId") Long userId, @RequestBody CustomerDTO dto) {
-        return customerService.saveCustomer(userId, dto);
+        return customerService.create(userId, dto);
     }
 
     @PutMapping

@@ -1,12 +1,12 @@
-package com.api.management.service.adress;
+package com.api.management.service.address;
 
 import com.api.management.dto.AddressDTO;
 
-import java.util.List;
+import java.util.Set;
 
 public interface AddressService {
     AddressDTO findById(Long id);
-    List<AddressDTO> findAddressSetByCustomerId(Long userId);
+    Set<AddressDTO> findAddressSetByCustomerId(Long userId);
     AddressDTO create(Long idCustomer, AddressDTO dto);
     AddressDTO update(AddressDTO dto);
     void delete(Long customerId);

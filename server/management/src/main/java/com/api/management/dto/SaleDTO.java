@@ -8,7 +8,6 @@ import java.util.Date;
 
 public class SaleDTO {
 
-
     private Long id;
     private DeliveryStatus deliveryStatus;
     private PaymentStatus paymentStatus;

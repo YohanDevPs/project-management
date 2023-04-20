@@ -1,14 +1,16 @@
 package com.api.management.service.sale;
 
+import com.api.management.dto.SaleDTO;
 import com.api.management.model.Sale;
 
+import java.util.List;
 import java.util.Set;
 
 public interface SaleService {
 
-    Sale findById(Long id);
-    Set<Sale> findSetByCustomerId(Long id);
-    Sale create(Sale sale);
-    Sale update(Sale sale);
+    SaleDTO findById(Long id);
+    List<SaleDTO> findListByCustomerId(Long id);
+    SaleDTO create(Long customerId, SaleDTO dto);
+    SaleDTO update(SaleDTO sale);
     void deleteById(Long id);
 }

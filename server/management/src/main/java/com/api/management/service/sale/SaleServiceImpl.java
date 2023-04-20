@@ -1,56 +1,75 @@
 package com.api.management.service.sale;
 
+import com.api.management.dto.SaleDTO;
+import com.api.management.exception.ResourceNotFoundException;
+import com.api.management.mapper.UtilModelMapper;
 import com.api.management.model.Sale;
+import com.api.management.repository.CustomerRepository;
 import com.api.management.repository.SaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
+
+import static com.api.management.mapper.UtilModelMapper.parseObject;
 
 @Service
 public class SaleServiceImpl implements SaleService{
 
     @Autowired
     private SaleRepository saleRepository;
-
+    @Autowired
+    private CustomerRepository customerRepository;
 
     @Override
-    public Sale findById(Long id) {
-        return saleRepository.findById(id).orElseThrow(NoSuchElementException::new);
+    public SaleDTO findById(Long id) {
+        var entity = saleRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Sale not found"));
+        
+        return parseObject(entity, SaleDTO.class);
     }
 
     @Override
-    public Set<Sale> findSetByCustomerId(Long id) {
-        return null;
+    public List<SaleDTO> findListByCustomerId(Long id) {
+        var customerEntity = customerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Customer not found"));
+
+        var saleList= saleRepository.findByCustomerId(customerEntity.getId());
+        return UtilModelMapper.parseListObjects(saleList, SaleDTO.class);
     }
 
     @Override
-    public Sale create(Sale sale) {
-        return saleRepository.save(sale);
+    public SaleDTO create(Long customerId, SaleDTO dto) {
+        var entity = customerRepository.findById(customerId)
+                .orElseThrow(() -> new ResourceNotFoundException("Customer not found"));
+
+        var saleEntity = parseObject(dto, Sale.class);
+        saleEntity.setCustomer(entity);
+
+        return parseObject(saleRepository.save(saleEntity), SaleDTO.class);
     }
 
     @Override
-    public Sale update(Sale sale) {
-        var entity = saleRepository.findById(sale.getId())
-                .orElseThrow(NoSuchElementException::new);
-//
-//        entity.setPricing_type(sale.getPricing_type());
-//        entity.setPaymentStatus(sale.getPaymentStatus());
-//        entity.setMoment(sale.getMoment());
-//        entity.setUnit_price(sale.getUnit_price());
-//        entity.setQuantity(sale.getQuantity());
-//        entity.setWeight_price(sale.getWeight_price());
-//        entity.setWeight(sale.getWeight());
-//        entity.setTotal_price(sale.getTotal_price());
-//        entity.setProducts(sale.getProducts());
-//        entity.setCustomer(sale.getCustomer());
+    public SaleDTO update(SaleDTO dto) {
+        var entity = saleRepository.findById(dto.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Sale not found"));
 
-        return entity;
+
+        entity.setDeliveryStatus(dto.getDeliveryStatus());
+        entity.setPaymentStatus(dto.getPaymentStatus());
+        entity.setMoment(dto.getMoment());
+        entity.setTotalPrice(dto.getTotalPrice());
+
+        return parseObject(saleRepository.save(entity), SaleDTO.class);
     }
 
     @Override
     public void deleteById(Long id) {
-        saleRepository.deleteById(id);
+        var entity = saleRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Sale not found"));
+
+        saleRepository.delete(entity);
     }
 }

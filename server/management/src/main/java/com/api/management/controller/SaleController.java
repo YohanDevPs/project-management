@@ -1,49 +1,47 @@
 package com.api.management.controller;
 
-import com.api.management.model.Sale;
+import com.api.management.dto.SaleDTO;
 import com.api.management.service.sale.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
+import java.util.List;
 
 @RestController
 @RequestMapping("/sale")
 public class SaleController {
 
     @Autowired
-    private SaleService saleService;
-
+    private SaleService service;
 
     @GetMapping(value = "/customer/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public Set<Sale> findSetByCustomerId(@PathVariable("id") Long id) {
-        return saleService.findSetByCustomerId(id);
+    public List<SaleDTO> findListByCustomerId(@PathVariable("id") Long id) {
+        return service.findListByCustomerId(id);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Sale findById(@PathVariable("id") Long id) {
-        return saleService.findById(id);
+    public SaleDTO findById(@PathVariable("id") Long id) {
+        return service.findById(id);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable("id") Long id) {
-        saleService.deleteById(id);
+        service.deleteById(id);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+    @PostMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Sale create(@RequestBody Sale sale) {
-        return saleService.create(sale);
+    public SaleDTO create(@PathVariable("id") Long id, @RequestBody SaleDTO dto) {
+        return service.create(id, dto);
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Sale updade(@RequestBody Sale sale) {
-        return saleService.update(sale);
+    public SaleDTO update(@RequestBody SaleDTO SaleDTO) {
+        return service.update(SaleDTO);
     }
-
 }

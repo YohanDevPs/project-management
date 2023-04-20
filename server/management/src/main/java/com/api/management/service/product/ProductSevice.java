@@ -1,12 +1,16 @@
 package com.api.management.service.product;
 
-import com.api.management.model.Product;
+import com.api.management.dto.ProductDTO;
+
+import java.util.List;
 
 public interface ProductSevice {
 
-    Product findProductById(Long productId);
-//    Set<Product> findProductSetByBusinessId(Long businessId);
-    void saveProduct(Product product);
-    Product updateProduct(Long productId, Product product);
-    void deleteProductById(Long businessId);
+    ProductDTO findById(Long productId);
+    List<ProductDTO> findProductsBySaleId(Long businessId);
+    List<ProductDTO> findProductsByReplenishmentId(Long businessId);
+    ProductDTO createProductToReplenishment(Long replenishmentId, ProductDTO product);
+    ProductDTO createProductToSale(Long saleId, ProductDTO product);
+    ProductDTO update(ProductDTO product);
+    void delete(Long businessId);
 }

@@ -1,38 +1,19 @@
-package com.api.management.model;
+package com.api.management.dto;
 
 import com.api.management.enums.UnitType;
-import jakarta.persistence.*;
-
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "tab_product")
-public class Product {
+public class ProductDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "name", nullable = false)
     private String name;
-    @Column(name = "description")
     private String description;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "unit_type", nullable = false)
     private UnitType unitType;
-    @Column(name = "amount", nullable = false)
     private BigDecimal amount;
-    @Column(name = "unit_value", nullable = false)
     private BigDecimal unitValue;
-    @Column(name = "total_price")
     private BigDecimal totalPrice;
-    @ManyToOne
-    @JoinColumn(name = "sale_id")
-    private Sale sale;
-    @ManyToOne
-    @JoinColumn(name = "replenishment_id")
-    private Replenishment replenishment;
 
-    public Product() {
+    public ProductDTO() {
     }
 
     public Long getId() {
@@ -91,32 +72,29 @@ public class Product {
         this.totalPrice = totalPrice;
     }
 
-    public Sale getSale() {
-        return sale;
-    }
-
-    public void setSale(Sale sale) {
-        this.sale = sale;
-    }
-
-    public Replenishment getReplenishment() {
-        return replenishment;
-    }
-
-    public void setReplenishment(Replenishment replenishment) {
-        this.replenishment = replenishment;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Product product)) return false;
+        if (!(o instanceof ProductDTO that)) return false;
 
-        return getId() != null ? getId().equals(product.getId()) : product.getId() == null;
+        if (getName() != null ? !getName().equals(that.getName()) : that.getName() != null) return false;
+        if (getDescription() != null ? !getDescription().equals(that.getDescription()) : that.getDescription() != null)
+            return false;
+        if (getUnitType() != that.getUnitType()) return false;
+        if (getAmount() != null ? !getAmount().equals(that.getAmount()) : that.getAmount() != null) return false;
+        if (getUnitValue() != null ? !getUnitValue().equals(that.getUnitValue()) : that.getUnitValue() != null)
+            return false;
+        return getTotalPrice() != null ? getTotalPrice().equals(that.getTotalPrice()) : that.getTotalPrice() == null;
     }
 
     @Override
     public int hashCode() {
-        return getId() != null ? getId().hashCode() : 0;
+        int result = getName() != null ? getName().hashCode() : 0;
+        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
+        result = 31 * result + (getUnitType() != null ? getUnitType().hashCode() : 0);
+        result = 31 * result + (getAmount() != null ? getAmount().hashCode() : 0);
+        result = 31 * result + (getUnitValue() != null ? getUnitValue().hashCode() : 0);
+        result = 31 * result + (getTotalPrice() != null ? getTotalPrice().hashCode() : 0);
+        return result;
     }
 }

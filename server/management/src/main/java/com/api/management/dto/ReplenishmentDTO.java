@@ -12,7 +12,7 @@ public class ReplenishmentDTO {
     private DeliveryStatus deliveryStatus;
     private PaymentStatus paymentStatus;
     private Date moment;
-    private BigDecimal total_price;
+    private BigDecimal totalPrice;
 
     public ReplenishmentDTO() {
     }
@@ -26,7 +26,7 @@ public class ReplenishmentDTO {
     }
 
     public DeliveryStatus getDeliveryStatus() {
-        return deliveryStatus;
+        return DeliveryStatus.DELIVERED;
     }
 
     public void setDeliveryStatus(DeliveryStatus deliveryStatus) {
@@ -49,11 +49,33 @@ public class ReplenishmentDTO {
         this.moment = moment;
     }
 
-    public BigDecimal getTotal_price() {
-        return total_price;
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setTotal_price(BigDecimal total_price) {
-        this.total_price = total_price;
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ReplenishmentDTO that)) return false;
+
+        if (getId() != null ? !getId().equals(that.getId()) : that.getId() != null) return false;
+        if (getDeliveryStatus() != that.getDeliveryStatus()) return false;
+        if (getPaymentStatus() != that.getPaymentStatus()) return false;
+        if (getMoment() != null ? !getMoment().equals(that.getMoment()) : that.getMoment() != null) return false;
+        return getTotalPrice() != null ? getTotalPrice().equals(that.getTotalPrice()) : that.getTotalPrice() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getDeliveryStatus() != null ? getDeliveryStatus().hashCode() : 0);
+        result = 31 * result + (getPaymentStatus() != null ? getPaymentStatus().hashCode() : 0);
+        result = 31 * result + (getMoment() != null ? getMoment().hashCode() : 0);
+        result = 31 * result + (getTotalPrice() != null ? getTotalPrice().hashCode() : 0);
+        return result;
     }
 }

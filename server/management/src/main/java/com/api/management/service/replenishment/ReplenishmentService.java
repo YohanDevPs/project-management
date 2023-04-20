@@ -2,12 +2,12 @@ package com.api.management.service.replenishment;
 
 import com.api.management.dto.ReplenishmentDTO;
 
-import java.util.Set;
+import java.util.List;
 
 public interface ReplenishmentService {
 
     ReplenishmentDTO findById(Long id);
-    Set<ReplenishmentDTO> findReplenishmentSetByCustomerId(Long customerId);
+    List<ReplenishmentDTO> findReplenishmentListBySupplierId(Long customerId);
     ReplenishmentDTO create(Long customerId, ReplenishmentDTO dto);
     ReplenishmentDTO update(ReplenishmentDTO dto);
     void delete(Long id);

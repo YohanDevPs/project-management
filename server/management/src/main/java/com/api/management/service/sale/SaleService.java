@@ -1,10 +1,8 @@
 package com.api.management.service.sale;
 
 import com.api.management.dto.SaleDTO;
-import com.api.management.model.Sale;
 
 import java.util.List;
-import java.util.Set;
 
 public interface SaleService {
 

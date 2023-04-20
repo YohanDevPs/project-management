@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
+import static com.api.management.util.UtilMediaType.*;
+import static com.api.management.util.UtilMediaType.APPLICATION_YML;
+
 @RestController
 @RequestMapping("/supplier")
 public class SupplierController {
@@ -15,13 +18,13 @@ public class SupplierController {
     @Autowired
     private SupplierService supplierService;
 
-    @GetMapping("/allByUser/{id}")
+    @GetMapping(value = "/user/{id}", produces = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
     @ResponseStatus(HttpStatus.OK)
     public Set<SupplierDTO> findByUserId(@PathVariable("id") Long id) {
         return supplierService.findSupplierSetByUserId(id);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
     @ResponseStatus(HttpStatus.OK)
     public SupplierDTO findById(@PathVariable("id") Long id) {
         return supplierService.findById(id);
@@ -33,13 +36,16 @@ public class SupplierController {
         supplierService.delete(id);
     }
 
-    @PostMapping("/user/{id}")
+    @PostMapping(value = "/user/{id}",
+            consumes = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML},
+            produces = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
     @ResponseStatus(HttpStatus.CREATED)
     public SupplierDTO create(@PathVariable("id") Long id, @RequestBody SupplierDTO dto) {
         return supplierService.create(id, dto);
     }
 
-    @PutMapping
+    @PutMapping(consumes = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML},
+            produces = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
     @ResponseStatus(HttpStatus.OK)
     public SupplierDTO update(@RequestBody SupplierDTO dto) {
         return supplierService.update(dto);

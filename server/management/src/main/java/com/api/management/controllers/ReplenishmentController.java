@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.api.management.util.UtilMediaType.*;
+import static com.api.management.util.UtilMediaType.APPLICATION_YML;
+
 @RestController
 @RequestMapping("/replenishment")
 public class ReplenishmentController {
@@ -40,7 +43,8 @@ public class ReplenishmentController {
         return service.create(id, dto);
     }
 
-    @PutMapping
+    @PutMapping(consumes = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML},
+            produces = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
     @ResponseStatus(HttpStatus.OK)
     public ReplenishmentDTO update(@RequestBody ReplenishmentDTO dto) {
         return service.update(dto);

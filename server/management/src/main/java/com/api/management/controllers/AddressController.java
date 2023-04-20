@@ -8,33 +8,39 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
+import static com.api.management.util.UtilMediaType.*;
+
 @RestController
 @RequestMapping("/address")
 public class AddressController {
 
-
     @Autowired
     private AddressService service;
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}",  
+            produces = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML })
     @ResponseStatus(HttpStatus.OK)
     public AddressDTO findById(@PathVariable("id") Long id) {
         return service.findById(id);
     }
 
-    @GetMapping("/customer/{id}")
+    @GetMapping(value = "/customer/{id}", 
+            produces = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML })
     @ResponseStatus(HttpStatus.OK)
     public Set<AddressDTO> getCustomersByUserId(@PathVariable("id") Long id) {
         return service.findAddressSetByCustomerId(id);
     }
 
-    @PostMapping("/{customerId}")
+    @PostMapping(value = "/{customerId}" , 
+            consumes = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML},
+            produces = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML })
     @ResponseStatus(HttpStatus.CREATED)
     public AddressDTO create(@PathVariable("userId") Long customerId, @RequestBody AddressDTO dto) {
         return service.create(customerId, dto);
     }
 
-    @PutMapping
+    @PutMapping( consumes = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML},
+            produces = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML })
     @ResponseStatus(HttpStatus.OK)
     public AddressDTO update(@RequestBody AddressDTO dto) {
         return service.update(dto);

@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.api.management.util.UtilMediaType.*;
+import static com.api.management.util.UtilMediaType.APPLICATION_YML;
+
 
 @RestController
 @RequestMapping("/product")
@@ -16,19 +19,19 @@ public class ProductController {
     @Autowired
     private ProductSevice productSevice;
 
-    @GetMapping("/replenishment/{replenishmentId}")
+    @GetMapping(value = "/replenishment/{replenishmentId}", produces = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
     @ResponseStatus(HttpStatus.OK)
     public List<ProductDTO> getProductByReplenishmentId(@PathVariable("replenishmentId") Long replenishmentId) {
         return productSevice.findProductsByReplenishmentId(replenishmentId);
     }
 
-    @GetMapping("/sale/{saleId}")
+    @GetMapping(value = "/sale/{saleId}", produces = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
     @ResponseStatus(HttpStatus.OK)
     public List<ProductDTO> getProductBySaleId(@PathVariable("saleId") Long saleId) {
         return productSevice.findProductsBySaleId(saleId);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
     @ResponseStatus(HttpStatus.OK)
     public ProductDTO getProductById(@PathVariable("id") Long id) {
         return productSevice.findById(id);
@@ -46,13 +49,16 @@ public class ProductController {
         return productSevice.createProductToReplenishment(id, dto);
     }
 
-    @PostMapping("/sale/{id}")
+    @PostMapping(value = "/sale/{id}",
+            consumes = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML},
+            produces = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
     @ResponseStatus(HttpStatus.CREATED)
     public ProductDTO createProductToSale(@PathVariable("id") Long id, @RequestBody ProductDTO dto) {
         return productSevice.createProductToSale(id, dto);
     }
 
-    @PutMapping
+    @PutMapping(consumes = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML},
+            produces = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
     @ResponseStatus(HttpStatus.OK)
     public ProductDTO update( @RequestBody ProductDTO dto) {
         return productSevice.update(dto);

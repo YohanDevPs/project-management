@@ -1,11 +1,11 @@
 package com.api.management.service.product;
 
 import com.api.management.dto.ProductDTO;
-import com.api.management.exception.ResourceNotFoundException;
-import com.api.management.model.Product;
-import com.api.management.repository.ProductRepository;
-import com.api.management.repository.ReplenishmentRepository;
-import com.api.management.repository.SaleRepository;
+import com.api.management.exceptions.ResourceNotFoundException;
+import com.api.management.models.Product;
+import com.api.management.repositorys.ProductRepository;
+import com.api.management.repositorys.ReplenishmentRepository;
+import com.api.management.repositorys.SaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,10 +1,10 @@
 package com.api.management.service.replenishment;
 
 import com.api.management.dto.ReplenishmentDTO;
-import com.api.management.exception.ResourceNotFoundException;
-import com.api.management.model.Replenishment;
-import com.api.management.repository.ReplenishmentRepository;
-import com.api.management.repository.SupplierRepository;
+import com.api.management.exceptions.ResourceNotFoundException;
+import com.api.management.models.Replenishment;
+import com.api.management.repositorys.ReplenishmentRepository;
+import com.api.management.repositorys.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

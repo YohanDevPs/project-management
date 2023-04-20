@@ -1,4 +1,4 @@
-package com.api.management.model;
+package com.api.management.models;
 
 import com.api.management.enums.DeliveryStatus;
 import com.api.management.enums.PaymentStatus;
@@ -10,8 +10,8 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "tab_sales")
-public class Sale {
+@Table(name = "tab_replenishment")
+public class Replenishment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,13 +26,13 @@ public class Sale {
     private Date moment;
     @Column(name = "total_price")
     private BigDecimal totalPrice;
-    @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "replenishment", cascade = CascadeType.ALL)
     private List<Product> products = new ArrayList<>();
     @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    @JoinColumn(name = "supplier_id")
+    private Supplier supplier;
 
-    public Sale() {
+    public Replenishment() {
     }
 
     public Long getId() {
@@ -83,24 +83,39 @@ public class Sale {
         this.products = products;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Supplier getSupplier() {
+        return supplier;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Sale sale)) return false;
+        if (!(o instanceof Replenishment that)) return false;
 
-        return getId() != null ? getId().equals(sale.getId()) : sale.getId() == null;
+        if (getId() != null ? !getId().equals(that.getId()) : that.getId() != null) return false;
+        if (getDeliveryStatus() != that.getDeliveryStatus()) return false;
+        if (getPaymentStatus() != that.getPaymentStatus()) return false;
+        if (getMoment() != null ? !getMoment().equals(that.getMoment()) : that.getMoment() != null) return false;
+        if (getTotalPrice() != null ? !getTotalPrice().equals(that.getTotalPrice()) : that.getTotalPrice() != null)
+            return false;
+        if (getProducts() != null ? !getProducts().equals(that.getProducts()) : that.getProducts() != null)
+            return false;
+        return getSupplier() != null ? getSupplier().equals(that.getSupplier()) : that.getSupplier() == null;
     }
 
     @Override
     public int hashCode() {
-        return getId() != null ? getId().hashCode() : 0;
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getDeliveryStatus() != null ? getDeliveryStatus().hashCode() : 0);
+        result = 31 * result + (getPaymentStatus() != null ? getPaymentStatus().hashCode() : 0);
+        result = 31 * result + (getMoment() != null ? getMoment().hashCode() : 0);
+        result = 31 * result + (getTotalPrice() != null ? getTotalPrice().hashCode() : 0);
+        result = 31 * result + (getProducts() != null ? getProducts().hashCode() : 0);
+        result = 31 * result + (getSupplier() != null ? getSupplier().hashCode() : 0);
+        return result;
     }
 }

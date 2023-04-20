@@ -1,4 +1,4 @@
-package com.api.management.model;
+package com.api.management.models;
 
 import jakarta.persistence.*;
 

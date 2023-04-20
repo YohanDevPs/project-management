@@ -1,11 +1,11 @@
 package com.api.management.service.supplier;
 
 import com.api.management.dto.SupplierDTO;
-import com.api.management.exception.ResourceNotFoundException;
-import com.api.management.exception.UserNotFoundException;
-import com.api.management.model.Supplier;
-import com.api.management.repository.SupplierRepository;
-import com.api.management.repository.UserRepository;
+import com.api.management.exceptions.ResourceNotFoundException;
+import com.api.management.exceptions.UserNotFoundException;
+import com.api.management.models.Supplier;
+import com.api.management.repositorys.SupplierRepository;
+import com.api.management.repositorys.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.api.management.exception;
+package com.api.management.exceptions;
 
 public class UserNotFoundException extends RuntimeException{
 

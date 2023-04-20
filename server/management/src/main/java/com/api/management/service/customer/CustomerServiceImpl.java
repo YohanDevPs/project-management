@@ -1,10 +1,10 @@
 package com.api.management.service.customer;
 
 import com.api.management.dto.CustomerDTO;
-import com.api.management.exception.UserNotFoundException;
-import com.api.management.model.Customer;
-import com.api.management.repository.CustomerRepository;
-import com.api.management.repository.UserRepository;
+import com.api.management.exceptions.UserNotFoundException;
+import com.api.management.models.Customer;
+import com.api.management.repositorys.CustomerRepository;
+import com.api.management.repositorys.UserRepository;
 import com.api.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

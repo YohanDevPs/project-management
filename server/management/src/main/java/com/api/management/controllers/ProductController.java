@@ -1,4 +1,4 @@
-package com.api.management.controller;
+package com.api.management.controllers;
 
 import com.api.management.dto.ProductDTO;
 import com.api.management.service.product.ProductSevice;

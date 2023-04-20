@@ -1,11 +1,11 @@
 package com.api.management.service.address;
 
 import com.api.management.dto.AddressDTO;
-import com.api.management.exception.ResourceNotFoundException;
+import com.api.management.exceptions.ResourceNotFoundException;
 import com.api.management.mapper.UtilModelMapper;
-import com.api.management.model.Address;
-import com.api.management.repository.AddressRepository;
-import com.api.management.repository.CustomerRepository;
+import com.api.management.models.Address;
+import com.api.management.repositorys.AddressRepository;
+import com.api.management.repositorys.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

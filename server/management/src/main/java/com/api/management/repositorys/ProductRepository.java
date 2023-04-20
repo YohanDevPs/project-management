@@ -1,6 +1,6 @@
-package com.api.management.repository;
+package com.api.management.repositorys;
 
-import com.api.management.model.Product;
+import com.api.management.models.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

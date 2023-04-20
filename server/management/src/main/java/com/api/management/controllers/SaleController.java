@@ -1,4 +1,4 @@
-package com.api.management.controller;
+package com.api.management.controllers;
 
 import com.api.management.dto.SaleDTO;
 import com.api.management.service.sale.SaleService;

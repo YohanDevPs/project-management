@@ -1,4 +1,4 @@
-package com.api.management.model;
+package com.api.management.models;
 
 import com.api.management.enums.UnitType;
 import jakarta.persistence.*;

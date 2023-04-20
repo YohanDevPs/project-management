@@ -1,4 +1,4 @@
-package com.api.management.resources;
+package com.api.management.exceptions.resources;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;

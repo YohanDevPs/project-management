@@ -1,9 +1,9 @@
 package com.api.management.service.user;
 
 import com.api.management.dto.UserDTO;
-import com.api.management.exception.UserNotFoundException;
-import com.api.management.model.User;
-import com.api.management.repository.UserRepository;
+import com.api.management.exceptions.UserNotFoundException;
+import com.api.management.models.User;
+import com.api.management.repositorys.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

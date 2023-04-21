@@ -1,9 +1,11 @@
 package com.api.management.dto;
 
 
+import org.springframework.hateoas.RepresentationModel;
+
 import java.util.Objects;
 
-public class AddressDTO {
+public class AddressDTO extends RepresentationModel<AddressDTO> {
 
     private Long id;
     private String street;

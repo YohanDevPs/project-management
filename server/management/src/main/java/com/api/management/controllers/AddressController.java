@@ -35,7 +35,7 @@ public class AddressController {
             consumes = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML},
             produces = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML })
     @ResponseStatus(HttpStatus.CREATED)
-    public AddressDTO create(@PathVariable("userId") Long customerId, @RequestBody AddressDTO dto) {
+    public AddressDTO create(@PathVariable("customerId") Long customerId, @RequestBody AddressDTO dto) {
         return service.create(customerId, dto);
     }
 

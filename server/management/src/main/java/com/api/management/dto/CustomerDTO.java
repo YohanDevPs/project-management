@@ -1,6 +1,8 @@
 package com.api.management.dto;
 
-public class CustomerDTO {
+import org.springframework.hateoas.RepresentationModel;
+
+public class CustomerDTO extends RepresentationModel<CustomerDTO> {
 
     private Long id;
     private String name;

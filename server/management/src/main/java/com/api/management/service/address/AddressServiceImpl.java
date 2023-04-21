@@ -19,8 +19,8 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @Service
 public class AddressServiceImpl implements AddressService {
 
-    public static final String ADDRESS_NOT_FOUND = "Address if id %d not found";
-    public static final String CUSTOMER_NOT_FOUND_MSG = "Customer if id %d not found";
+    public static final String ADDRESS_NOT_FOUND_MSG = "Address if id [%d] not found";
+    public static final String CUSTOMER_NOT_FOUND_MSG = "Customer if id [%d] not found";
     @Autowired
     private AddressRepository addressRepository;
     @Autowired
@@ -29,7 +29,7 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public AddressDTO findById(Long id) {
         var addressEntity = addressRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format(ADDRESS_NOT_FOUND, id)));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format(ADDRESS_NOT_FOUND_MSG, id)));
 
         var addressDTO = parseObject(addressEntity, AddressDTO.class);
         addressDTO.add(linkTo(methodOn(AddressController.class).findById(id)).withSelfRel());
@@ -64,7 +64,7 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public AddressDTO update(AddressDTO dto) {
         var addressDTO = addressRepository.findById(dto.getId())
-                .orElseThrow(() -> new ResourceNotFoundException(String.format(ADDRESS_NOT_FOUND, dto.getId())));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format(ADDRESS_NOT_FOUND_MSG, dto.getId())));
 
         addressDTO.setStreet(dto.getStreet());
         addressDTO.setNumber(dto.getNumber());
@@ -81,7 +81,7 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public void delete(Long addressId) {
         var addressDTO = addressRepository.findById(addressId)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format(ADDRESS_NOT_FOUND, addressId)));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format(ADDRESS_NOT_FOUND_MSG, addressId)));
 
         addressRepository.delete(addressDTO);
     }

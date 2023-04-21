@@ -1,4 +1,4 @@
-package com.api.management.mapper;
+package com.api.management.util.mapper;
 
 import org.modelmapper.ModelMapper;
 

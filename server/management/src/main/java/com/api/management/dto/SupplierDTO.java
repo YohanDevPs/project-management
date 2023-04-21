@@ -1,6 +1,8 @@
 package com.api.management.dto;
 
-public class SupplierDTO {
+import org.springframework.hateoas.RepresentationModel;
+
+public class SupplierDTO extends RepresentationModel<SupplierDTO> {
 
     private Long id;
     private String name;

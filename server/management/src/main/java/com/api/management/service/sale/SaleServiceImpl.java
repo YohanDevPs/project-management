@@ -2,16 +2,16 @@ package com.api.management.service.sale;
 
 import com.api.management.dto.SaleDTO;
 import com.api.management.exceptions.ResourceNotFoundException;
-import com.api.management.mapper.UtilModelMapper;
 import com.api.management.models.Sale;
 import com.api.management.repositorys.CustomerRepository;
 import com.api.management.repositorys.SaleRepository;
+import com.api.management.util.mapper.UtilModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.api.management.mapper.UtilModelMapper.parseObject;
+import static com.api.management.util.mapper.UtilModelMapper.parseObject;
 
 @Service
 public class SaleServiceImpl implements SaleService{

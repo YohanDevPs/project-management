@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.api.management.mapper.UtilModelMapper.parseListObjects;
-import static com.api.management.mapper.UtilModelMapper.parseObject;
+import static com.api.management.util.mapper.UtilModelMapper.parseListObjects;
+import static com.api.management.util.mapper.UtilModelMapper.parseObject;
 
 @Service
 public class ProductServiceImpl implements ProductSevice {

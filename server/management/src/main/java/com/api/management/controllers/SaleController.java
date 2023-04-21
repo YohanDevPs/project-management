@@ -2,14 +2,13 @@ package com.api.management.controllers;
 
 import com.api.management.dto.SaleDTO;
 import com.api.management.service.sale.SaleService;
-import com.api.management.util.UtilMediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.api.management.util.UtilMediaType.*;
+import static com.api.management.util.constants.UtilMediaType.*;
 
 @RestController
 @RequestMapping("/sale")

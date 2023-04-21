@@ -12,16 +12,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
-import static com.api.management.mapper.UtilModelMapper.parseObject;
-import static com.api.management.mapper.UtilModelMapper.parseSetObjects;
+import static com.api.management.util.constants.ErrorMessageConstants.CUSTOMER_NOT_FOUND_MSG;
+import static com.api.management.util.constants.ErrorMessageConstants.USER_NOT_FOUND_MSG;
+import static com.api.management.util.mapper.UtilModelMapper.parseObject;
+import static com.api.management.util.mapper.UtilModelMapper.parseSetObjects;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
-
-    public static final String CUSTOMER_NOT_FOUND_MSG = "Customer com id [%d] not found";
-    public static final String USER_NOT_FOUND_MSG = "User if id [%d] not found";
+    
     @Autowired
     private CustomerRepository customerRepository;
     @Autowired

@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
-import static com.api.management.util.UtilMediaType.*;
-import static com.api.management.util.UtilMediaType.APPLICATION_YML;
+import static com.api.management.util.constants.UtilMediaType.*;
 
 @RestController
 @RequestMapping("/supplier")

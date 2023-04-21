@@ -6,21 +6,22 @@ import com.api.management.exceptions.ResourceNotFoundException;
 import com.api.management.models.Address;
 import com.api.management.repositorys.AddressRepository;
 import com.api.management.repositorys.CustomerRepository;
+import com.api.management.util.constants.ErrorMessageConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
-import static com.api.management.mapper.UtilModelMapper.parseObject;
-import static com.api.management.mapper.UtilModelMapper.parseSetObjects;
+import static com.api.management.util.constants.ErrorMessageConstants.ADDRESS_NOT_FOUND_MSG;
+import static com.api.management.util.constants.ErrorMessageConstants.CUSTOMER_NOT_FOUND_MSG;
+import static com.api.management.util.mapper.UtilModelMapper.parseObject;
+import static com.api.management.util.mapper.UtilModelMapper.parseSetObjects;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Service
 public class AddressServiceImpl implements AddressService {
 
-    public static final String ADDRESS_NOT_FOUND_MSG = "Address if id [%d] not found";
-    public static final String CUSTOMER_NOT_FOUND_MSG = "Customer if id [%d] not found";
     @Autowired
     private AddressRepository addressRepository;
     @Autowired
@@ -64,7 +65,7 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public AddressDTO update(AddressDTO dto) {
         var addressDTO = addressRepository.findById(dto.getId())
-                .orElseThrow(() -> new ResourceNotFoundException(String.format(ADDRESS_NOT_FOUND_MSG, dto.getId())));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format(ErrorMessageConstants.ADDRESS_NOT_FOUND_MSG, dto.getId())));
 
         addressDTO.setStreet(dto.getStreet());
         addressDTO.setNumber(dto.getNumber());
@@ -81,7 +82,7 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public void delete(Long addressId) {
         var addressDTO = addressRepository.findById(addressId)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format(ADDRESS_NOT_FOUND_MSG, addressId)));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format(ErrorMessageConstants.ADDRESS_NOT_FOUND_MSG, addressId)));
 
         addressRepository.delete(addressDTO);
     }

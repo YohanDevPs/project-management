@@ -11,14 +11,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
-import static com.api.management.mapper.UtilModelMapper.parseObject;
-import static com.api.management.mapper.UtilModelMapper.parseSetObjects;
+import static com.api.management.util.constants.ErrorMessageConstants.CUSTOMER_NOT_FOUND_MSG;
+import static com.api.management.util.constants.ErrorMessageConstants.USER_NOT_FOUND_MSG;
+import static com.api.management.util.mapper.UtilModelMapper.parseObject;
+import static com.api.management.util.mapper.UtilModelMapper.parseSetObjects;
 
 @Service
 public class SupplierServiceImpl implements SupplierService {
 
-    public static final String CUSTOMER_NOT_FOUND = "Customer com id: %d não encontrado";
-    public static final String USER_NOT_FOUND = "Usuário com id: %d não encontrado";
     @Autowired
     private SupplierRepository supplierRepository;
     @Autowired
@@ -41,7 +41,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public SupplierDTO create(Long userId, SupplierDTO dto) {
         var userEntity = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException(String.format(USER_NOT_FOUND, userId)));
+                .orElseThrow(() -> new UserNotFoundException(String.format(USER_NOT_FOUND_MSG, userId)));
 
         var supplierEntity = parseObject(dto, Supplier.class);
         supplierEntity.setUser(userEntity);
@@ -52,7 +52,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public SupplierDTO update(SupplierDTO dto) {
         var entity = supplierRepository.findById(dto.getId())
-                .orElseThrow(() -> new ResourceNotFoundException(String.format(CUSTOMER_NOT_FOUND, dto.getId())));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format(CUSTOMER_NOT_FOUND_MSG, dto.getId())));
 
         entity.setName(dto.getName());
         entity.setPhone(dto.getPhone());
@@ -64,7 +64,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public void delete(Long id) {
         var entity = supplierRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format(CUSTOMER_NOT_FOUND, id)));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format(CUSTOMER_NOT_FOUND_MSG, id)));
 
         supplierRepository.delete(entity);
     }

@@ -1,4 +1,4 @@
-package com.api.management.util;
+package com.api.management.util.constants;
 
 public class UtilMediaType {
 

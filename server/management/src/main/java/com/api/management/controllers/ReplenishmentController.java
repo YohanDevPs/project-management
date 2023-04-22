@@ -2,7 +2,7 @@ package com.api.management.controllers;
 
 
 import com.api.management.dto.ReplenishmentDTO;
-import com.api.management.service.replenishment.ReplenishmentService;
+import com.api.management.services.replenishment.ReplenishmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

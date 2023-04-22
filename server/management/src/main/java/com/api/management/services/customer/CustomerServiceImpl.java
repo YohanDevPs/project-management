@@ -1,4 +1,4 @@
-package com.api.management.service.customer;
+package com.api.management.services.customer;
 
 import com.api.management.controllers.CustomerController;
 import com.api.management.dto.CustomerDTO;
@@ -33,7 +33,7 @@ public class CustomerServiceImpl implements CustomerService {
                 .orElseThrow(() -> new ResourceNotFoundException(String.format(CUSTOMER_NOT_FOUND_MSG, id)));
 
         var customerDTO = parseObject(customerEntity, CustomerDTO.class);
-        customerDTO.add(linkTo(methodOn(CustomerController.class).getCustomerById(id)).withSelfRel());
+        customerDTO.add(linkTo(methodOn(CustomerController.class).findById(id)).withSelfRel());
         return customerDTO;
     }
 
@@ -43,7 +43,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         for (CustomerDTO dto: customerList) {
             dto.add(linkTo(methodOn(CustomerController.class)
-                    .getCustomerById(dto.getId()))
+                    .findById(dto.getId()))
                     .withSelfRel());
         }
 
@@ -60,7 +60,7 @@ public class CustomerServiceImpl implements CustomerService {
         var customerDTO = parseObject(customerRepository.save(customerEntity), CustomerDTO.class);
 
         customerDTO.add(linkTo(methodOn(CustomerController.class)
-                .getCustomerById(customerDTO.getId()))
+                .findById(customerDTO.getId()))
                 .withSelfRel());
 
         return customerDTO;
@@ -76,7 +76,7 @@ public class CustomerServiceImpl implements CustomerService {
         entity.setPhone(dto.getPhone());
 
         var customerDTO = parseObject(customerRepository.save(entity), CustomerDTO.class);
-        customerDTO.add(linkTo(methodOn(CustomerController.class).getCustomerById(customerDTO.getId())).withSelfRel());
+        customerDTO.add(linkTo(methodOn(CustomerController.class).findById(customerDTO.getId())).withSelfRel());
         return customerDTO;
     }
 

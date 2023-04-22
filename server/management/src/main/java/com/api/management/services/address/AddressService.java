@@ -1,4 +1,4 @@
-package com.api.management.service.address;
+package com.api.management.services.address;
 
 import com.api.management.dto.AddressDTO;
 

@@ -1,7 +1,7 @@
 package com.api.management.controllers;
 
 import com.api.management.dto.UserDTO;
-import com.api.management.service.user.UserService;
+import com.api.management.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package com.api.management.service.sale;
+package com.api.management.services.sale;
 
 import com.api.management.dto.SaleDTO;
 

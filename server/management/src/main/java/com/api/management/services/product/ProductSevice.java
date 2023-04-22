@@ -1,4 +1,4 @@
-package com.api.management.service.product;
+package com.api.management.services.product;
 
 import com.api.management.dto.ProductDTO;
 

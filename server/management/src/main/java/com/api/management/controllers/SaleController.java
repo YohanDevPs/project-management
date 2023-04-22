@@ -1,7 +1,7 @@
 package com.api.management.controllers;
 
 import com.api.management.dto.SaleDTO;
-import com.api.management.service.sale.SaleService;
+import com.api.management.services.sale.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

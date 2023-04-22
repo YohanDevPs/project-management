@@ -1,7 +1,7 @@
 package com.api.management.controllers;
 
 import com.api.management.dto.AddressDTO;
-import com.api.management.service.address.AddressService;
+import com.api.management.services.address.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +27,7 @@ public class AddressController {
     @GetMapping(value = "/customer/{id}", 
             produces = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML })
     @ResponseStatus(HttpStatus.OK)
-    public Set<AddressDTO> getCustomersByUserId(@PathVariable("id") Long id) {
+    public Set<AddressDTO> findAllByUserId(@PathVariable("id") Long id) {
         return service.findAddressSetByCustomerId(id);
     }
 

@@ -1,4 +1,4 @@
-package com.api.management.service.user;
+package com.api.management.services.user;
 
 import com.api.management.dto.UserDTO;
 import com.api.management.exceptions.UserNotFoundException;

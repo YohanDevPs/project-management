@@ -1,7 +1,7 @@
 package com.api.management.controllers;
 
 import com.api.management.dto.CustomerDTO;
-import com.api.management.service.customer.CustomerService;
+import com.api.management.services.customer.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -20,14 +20,14 @@ public class CustomerController {
     @GetMapping(value = "/allByUser/{userId}",
             produces = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
     @ResponseStatus(HttpStatus.OK)
-    public Set<CustomerDTO> getCustomersByUserId(@PathVariable("userId") Long userId) {
+    public Set<CustomerDTO> findAllByUserId(@PathVariable("userId") Long userId) {
         return customerService.findCustomerSetByUserId(userId);
     }
 
     @GetMapping(value = "/{id}",
             produces = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
     @ResponseStatus(HttpStatus.OK)
-    public CustomerDTO getCustomerById(@PathVariable("id") Long id) {
+    public CustomerDTO findById(@PathVariable("id") Long id) {
         return customerService.findCustomerById(id);
     }
 

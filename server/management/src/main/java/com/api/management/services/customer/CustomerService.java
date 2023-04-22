@@ -1,4 +1,4 @@
-package com.api.management.service.customer;
+package com.api.management.services.customer;
 
 import com.api.management.dto.CustomerDTO;
 

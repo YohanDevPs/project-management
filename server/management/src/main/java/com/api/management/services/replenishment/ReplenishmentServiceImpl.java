@@ -1,4 +1,4 @@
-package com.api.management.service.replenishment;
+package com.api.management.services.replenishment;
 
 import com.api.management.dto.ReplenishmentDTO;
 import com.api.management.exceptions.ResourceNotFoundException;

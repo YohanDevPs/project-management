@@ -1,7 +1,7 @@
 package com.api.management.controllers;
 
 import com.api.management.dto.SupplierDTO;
-import com.api.management.service.supplier.SupplierService;
+import com.api.management.services.supplier.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +20,7 @@ public class SupplierController {
     @GetMapping(value = "/user/{id}", produces = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
     @ResponseStatus(HttpStatus.OK)
     public Set<SupplierDTO> findByUserId(@PathVariable("id") Long id) {
-        return supplierService.findSupplierSetByUserId(id);
+        return supplierService.findSuppliersByUserId(id);
     }
 
     @GetMapping(value = "/{id}", produces = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})

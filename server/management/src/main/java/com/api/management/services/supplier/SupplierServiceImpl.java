@@ -1,5 +1,6 @@
-package com.api.management.service.supplier;
+package com.api.management.services.supplier;
 
+import com.api.management.controllers.SupplierController;
 import com.api.management.dto.SupplierDTO;
 import com.api.management.exceptions.ResourceNotFoundException;
 import com.api.management.exceptions.UserNotFoundException;
@@ -15,6 +16,9 @@ import static com.api.management.util.constants.ErrorMessageConstants.CUSTOMER_N
 import static com.api.management.util.constants.ErrorMessageConstants.USER_NOT_FOUND_MSG;
 import static com.api.management.util.mapper.UtilModelMapper.parseObject;
 import static com.api.management.util.mapper.UtilModelMapper.parseSetObjects;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 
 @Service
 public class SupplierServiceImpl implements SupplierService {
@@ -25,17 +29,27 @@ public class SupplierServiceImpl implements SupplierService {
     private UserRepository userRepository;
 
     @Override
-    public Set<SupplierDTO> findSupplierSetByUserId(Long id) {
-        var entities = supplierRepository.findByUserId(id);
-        return parseSetObjects(entities, SupplierDTO.class);
+    public Set<SupplierDTO> findSuppliersByUserId(Long id) {
+        var suppliers = supplierRepository.findByUserId(id);
+        var suppliersDTOs = parseSetObjects(suppliers, SupplierDTO.class);
+
+        for (SupplierDTO dto: suppliersDTOs) {
+            dto.add(linkTo(methodOn(SupplierController.class)
+                    .findById(dto.getId()))
+                    .withSelfRel());
+        }
+
+        return suppliersDTOs;
     }
 
     @Override
     public SupplierDTO findById(Long id) {
-        var entity = supplierRepository.findById(id)
+        var supplierEntity = supplierRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Supplier not found"));
 
-        return parseObject(entity, SupplierDTO.class);
+        var supplierDTO = parseObject(supplierEntity, SupplierDTO.class);
+        supplierDTO.add(linkTo(methodOn(SupplierController.class).findById(supplierDTO.getId())).withSelfRel());
+        return supplierDTO;
     }
 
     @Override
@@ -46,19 +60,23 @@ public class SupplierServiceImpl implements SupplierService {
         var supplierEntity = parseObject(dto, Supplier.class);
         supplierEntity.setUser(userEntity);
         supplierRepository.save(supplierEntity);
-        return parseObject(supplierEntity, SupplierDTO.class);
+        var supplierDTO = parseObject(supplierEntity, SupplierDTO.class);
+        supplierDTO.add(linkTo(methodOn(SupplierController.class).findById(supplierDTO.getId())).withSelfRel());
+        return supplierDTO;
     }
 
     @Override
     public SupplierDTO update(SupplierDTO dto) {
-        var entity = supplierRepository.findById(dto.getId())
+        var supplierEntity = supplierRepository.findById(dto.getId())
                 .orElseThrow(() -> new ResourceNotFoundException(String.format(CUSTOMER_NOT_FOUND_MSG, dto.getId())));
 
-        entity.setName(dto.getName());
-        entity.setPhone(dto.getPhone());
-        entity.setComplement(dto.getComplement());
+        supplierEntity.setName(dto.getName());
+        supplierEntity.setPhone(dto.getPhone());
+        supplierEntity.setComplement(dto.getComplement());
 
-        return parseObject(supplierRepository.save(entity), SupplierDTO.class);
+        var supplierDTO = parseObject(supplierRepository.save(supplierEntity), SupplierDTO.class);
+        supplierDTO.add(linkTo(methodOn(SupplierController.class).findById(supplierDTO.getId())).withSelfRel());
+        return supplierDTO;
     }
 
     @Override

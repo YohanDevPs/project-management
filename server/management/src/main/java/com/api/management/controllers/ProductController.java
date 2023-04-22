@@ -1,7 +1,7 @@
 package com.api.management.controllers;
 
 import com.api.management.dto.ProductDTO;
-import com.api.management.service.product.ProductSevice;
+import com.api.management.services.product.ProductSevice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

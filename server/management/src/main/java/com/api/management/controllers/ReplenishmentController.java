@@ -21,7 +21,7 @@ public class ReplenishmentController {
     @GetMapping("/supplier/{id}")
     @ResponseStatus(HttpStatus.OK)
     public List<ReplenishmentDTO> findReplenishmentBySupplierId(@PathVariable("id") Long id) {
-        return service.findReplenishmentListBySupplierId(id);
+        return service.findReplenishmentsBySupplierId(id);
     }
 
     @GetMapping("/{id}")

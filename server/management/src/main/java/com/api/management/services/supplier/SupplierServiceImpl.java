@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
-import static com.api.management.util.constants.ErrorMessageConstants.CUSTOMER_NOT_FOUND_MSG;
+import static com.api.management.util.constants.ErrorMessageConstants.SUPPLIER_NOT_FOUND_MSG;
 import static com.api.management.util.constants.ErrorMessageConstants.USER_NOT_FOUND_MSG;
 import static com.api.management.util.mapper.UtilModelMapper.parseObject;
 import static com.api.management.util.mapper.UtilModelMapper.parseSetObjects;
@@ -45,7 +45,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public SupplierDTO findById(Long id) {
         var supplierEntity = supplierRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Supplier not found"));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format(SUPPLIER_NOT_FOUND_MSG, id)));
 
         var supplierDTO = parseObject(supplierEntity, SupplierDTO.class);
         supplierDTO.add(linkTo(methodOn(SupplierController.class).findById(supplierDTO.getId())).withSelfRel());
@@ -68,7 +68,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public SupplierDTO update(SupplierDTO dto) {
         var supplierEntity = supplierRepository.findById(dto.getId())
-                .orElseThrow(() -> new ResourceNotFoundException(String.format(CUSTOMER_NOT_FOUND_MSG, dto.getId())));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format(SUPPLIER_NOT_FOUND_MSG, dto.getId())));
 
         supplierEntity.setName(dto.getName());
         supplierEntity.setPhone(dto.getPhone());
@@ -82,7 +82,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public void delete(Long id) {
         var entity = supplierRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format(CUSTOMER_NOT_FOUND_MSG, id)));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format(SUPPLIER_NOT_FOUND_MSG, id)));
 
         supplierRepository.delete(entity);
     }

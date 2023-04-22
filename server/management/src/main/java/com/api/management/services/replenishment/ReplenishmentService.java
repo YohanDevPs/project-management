@@ -7,7 +7,7 @@ import java.util.List;
 public interface ReplenishmentService {
 
     ReplenishmentDTO findById(Long id);
-    List<ReplenishmentDTO> findReplenishmentListBySupplierId(Long customerId);
+    List<ReplenishmentDTO> findReplenishmentsBySupplierId(Long customerId);
     ReplenishmentDTO create(Long customerId, ReplenishmentDTO dto);
     ReplenishmentDTO update(ReplenishmentDTO dto);
     void delete(Long id);

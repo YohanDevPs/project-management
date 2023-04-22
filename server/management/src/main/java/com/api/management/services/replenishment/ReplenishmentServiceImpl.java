@@ -1,5 +1,6 @@
 package com.api.management.services.replenishment;
 
+import com.api.management.controllers.ReplenishmentController;
 import com.api.management.dto.ReplenishmentDTO;
 import com.api.management.exceptions.ResourceNotFoundException;
 import com.api.management.models.Replenishment;
@@ -10,62 +11,87 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.api.management.util.constants.ErrorMessageConstants.REPLENISHMENT_NOT_FOUND_MSG;
+import static com.api.management.util.constants.ErrorMessageConstants.SUPPLIER_NOT_FOUND_MSG;
 import static com.api.management.util.mapper.UtilModelMapper.parseListObjects;
 import static com.api.management.util.mapper.UtilModelMapper.parseObject;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Service
 public class ReplenishmentServiceImpl implements ReplenishmentService{
 
     @Autowired
-    private ReplenishmentRepository repository;
+    private ReplenishmentRepository replenishmentRepository;
     @Autowired
     private SupplierRepository supplierRepository;
 
     @Override
     public ReplenishmentDTO findById(Long id) {
-        var entity = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Reposição nao encontrada"));
+        var replenishmentEntity = replenishmentRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format(REPLENISHMENT_NOT_FOUND_MSG, id)));
 
-        return parseObject(entity, ReplenishmentDTO.class);
+        var replenishmentDTO = parseObject(replenishmentEntity, ReplenishmentDTO.class);
+        replenishmentDTO.add(linkTo(methodOn(ReplenishmentController.class).findById(id)).withSelfRel());
+        return replenishmentDTO;
     }
 
     @Override
-    public List<ReplenishmentDTO> findReplenishmentListBySupplierId(Long customerId) {
-        var supplierEntity = supplierRepository.findById(customerId)
-                .orElseThrow(() -> new ResourceNotFoundException("Supplier not found"));
+    public List<ReplenishmentDTO> findReplenishmentsBySupplierId(Long id) {
+        var supplierEntity = supplierRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format(SUPPLIER_NOT_FOUND_MSG, id)));
 
-        return parseListObjects(repository.findBySupplierId(supplierEntity.getId()), ReplenishmentDTO.class);
+        var replenishmentDTOS = parseListObjects(
+                replenishmentRepository.findBySupplierId(supplierEntity.getId()), ReplenishmentDTO.class
+        );
+
+        for (ReplenishmentDTO dto: replenishmentDTOS) {
+            dto.add(linkTo(methodOn(ReplenishmentController.class)
+                    .findById(id))
+                    .withSelfRel());
+        }
+
+        return replenishmentDTOS;
     }
 
     @Override
     public ReplenishmentDTO create(Long supplierId, ReplenishmentDTO dto) {
         var supplierEntity = supplierRepository.findById(supplierId)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Supplier not found, id: ", supplierId)));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format(SUPPLIER_NOT_FOUND_MSG, supplierId)));
 
-        var replenishment = parseObject(dto, Replenishment.class);
-        replenishment.setSupplier(supplierEntity);
-        repository.save(replenishment);
-        return parseObject(replenishment, ReplenishmentDTO.class);
+        var replenishmentEntity = parseObject(dto, Replenishment.class);
+        replenishmentEntity.setSupplier(supplierEntity);
+
+        var replenishmentPersistedDTO = parseObject(replenishmentRepository.save(replenishmentEntity), ReplenishmentDTO.class);
+        replenishmentPersistedDTO.add(linkTo(methodOn(ReplenishmentController.class)
+                .findById(replenishmentPersistedDTO.getId())).withSelfRel());
+
+        return replenishmentPersistedDTO;
     }
 
     @Override
     public ReplenishmentDTO update(ReplenishmentDTO dto) {
-        var entity = repository.findById(dto.getId())
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Replenishment not found, id: ", dto.getId())));
+        var replenishmentEntity = replenishmentRepository.findById(dto.getId())
+                .orElseThrow(() -> new ResourceNotFoundException(String.format(REPLENISHMENT_NOT_FOUND_MSG, dto.getId())));
 
-        entity.setDeliveryStatus(dto.getDeliveryStatus());
-        entity.setPaymentStatus(dto.getPaymentStatus());
-        entity.setMoment(dto.getMoment());
-        entity.setTotalPrice(dto.getTotalPrice());
+        replenishmentEntity.setDeliveryStatus(dto.getDeliveryStatus());
+        replenishmentEntity.setPaymentStatus(dto.getPaymentStatus());
+        replenishmentEntity.setMoment(dto.getMoment());
+        replenishmentEntity.setTotalPrice(dto.getTotalPrice());
 
-        return parseObject(repository.save(entity), ReplenishmentDTO.class);
+        var replenishmentPersistedDTO = parseObject(replenishmentRepository.save(replenishmentEntity), ReplenishmentDTO.class);
+        replenishmentPersistedDTO.add(linkTo(methodOn(ReplenishmentController.class)
+                .findById(replenishmentPersistedDTO.getId()))
+                .withSelfRel());
+
+        return replenishmentPersistedDTO;
     }
 
     @Override
     public void delete(Long id) {
-        var entity = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Replenishment not found, id: ", id)));
+        var entity = replenishmentRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format(REPLENISHMENT_NOT_FOUND_MSG, id)));
 
-        repository.delete(entity);
+        replenishmentRepository.delete(entity);
     }
 }

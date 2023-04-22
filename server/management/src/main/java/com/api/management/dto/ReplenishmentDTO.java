@@ -2,11 +2,12 @@ package com.api.management.dto;
 
 import com.api.management.enums.DeliveryStatus;
 import com.api.management.enums.PaymentStatus;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class ReplenishmentDTO {
+public class ReplenishmentDTO extends RepresentationModel<ReplenishmentDTO> {
 
     private Long id;
     private DeliveryStatus deliveryStatus;

@@ -21,7 +21,7 @@ public class CustomerController {
             produces = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
     @ResponseStatus(HttpStatus.OK)
     public Set<CustomerDTO> findAllByUserId(@PathVariable("userId") Long userId) {
-        return customerService.findCustomerSetByUserId(userId);
+        return customerService.findCustomersByUserId(userId);
     }
 
     @GetMapping(value = "/{id}",

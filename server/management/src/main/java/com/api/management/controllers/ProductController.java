@@ -32,7 +32,7 @@ public class ProductController {
 
     @GetMapping(value = "/{id}", produces = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
     @ResponseStatus(HttpStatus.OK)
-    public ProductDTO getProductById(@PathVariable("id") Long id) {
+    public ProductDTO findProductById(@PathVariable("id") Long id) {
         return productSevice.findById(id);
     }
 

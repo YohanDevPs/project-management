@@ -27,7 +27,7 @@ public class ReplenishmentDTO extends RepresentationModel<ReplenishmentDTO> {
     }
 
     public DeliveryStatus getDeliveryStatus() {
-        return DeliveryStatus.DELIVERED;
+        return deliveryStatus;
     }
 
     public void setDeliveryStatus(DeliveryStatus deliveryStatus) {

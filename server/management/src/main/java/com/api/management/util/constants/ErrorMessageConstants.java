@@ -7,4 +7,6 @@ public class ErrorMessageConstants {
     public static final String CUSTOMER_NOT_FOUND_MSG = "Customer if id [%d] not found";
     public static final String SUPPLIER_NOT_FOUND_MSG = "Supplier if id [%d] not found";
     public static final String REPLENISHMENT_NOT_FOUND_MSG = "Replenishment if id [%d] not found";
+    public static final String SALE_NOT_FOUND_MSG = "Sale if id [%d] not found";
+    public static final String PRODUCT_NOT_FOUND_MSG = "Product if id [%d] not found";
 }

@@ -20,7 +20,7 @@ public class SaleController {
     @GetMapping(value = "/customer/{id}", produces = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
     @ResponseStatus(HttpStatus.OK)
     public List<SaleDTO> findListByCustomerId(@PathVariable("id") Long id) {
-        return service.findListByCustomerId(id);
+        return service.findSalesByCustomerId(id);
     }
 
     @GetMapping(value = "/{id}", produces = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})

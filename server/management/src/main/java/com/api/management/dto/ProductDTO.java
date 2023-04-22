@@ -1,10 +1,11 @@
 package com.api.management.dto;
 
 import com.api.management.enums.UnitType;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.math.BigDecimal;
 
-public class ProductDTO {
+public class ProductDTO extends RepresentationModel<ProductDTO> {
 
     private Long id;
     private String name;

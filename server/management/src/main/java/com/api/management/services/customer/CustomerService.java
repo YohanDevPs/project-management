@@ -7,7 +7,7 @@ import java.util.Set;
 public interface CustomerService {
 
     CustomerDTO findCustomerById(Long id);
-    Set<CustomerDTO> findCustomerSetByUserId(Long userId);
+    Set<CustomerDTO> findCustomersByUserId(Long userId);
     CustomerDTO create(Long idUser, CustomerDTO dto);
     CustomerDTO update(CustomerDTO dto);
     void deleteByCustomerId(Long customerId);

@@ -1,5 +1,6 @@
 package com.api.management.services.product;
 
+import com.api.management.controllers.ProductController;
 import com.api.management.dto.ProductDTO;
 import com.api.management.exceptions.ResourceNotFoundException;
 import com.api.management.models.Product;
@@ -11,8 +12,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.api.management.util.constants.ErrorMessageConstants.PRODUCT_NOT_FOUND_MSG;
 import static com.api.management.util.mapper.UtilModelMapper.parseListObjects;
 import static com.api.management.util.mapper.UtilModelMapper.parseObject;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Service
 public class ProductServiceImpl implements ProductSevice {
@@ -26,63 +30,97 @@ public class ProductServiceImpl implements ProductSevice {
     
     @Override
     public ProductDTO findById(Long id) {
-        var entity = productRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
-        
-        return parseObject(entity, ProductDTO.class);
+        var productEntity = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format(PRODUCT_NOT_FOUND_MSG, id)));
+
+        var productDTO = parseObject(productEntity, ProductDTO.class);
+        productDTO.add(linkTo(methodOn(ProductController.class).findProductById(id)).withSelfRel());
+        return productDTO;
     }
 
     @Override
     public List<ProductDTO> findProductsBySaleId(Long id) {
-        var sale = saleRepository.findById(id)
+        var saleEntity = saleRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Sale not found"));
 
-        return parseListObjects(productRepository.findBySaleId(sale.getId()), ProductDTO.class);
+        var productsDTOs =  parseListObjects(productRepository.findBySaleId(saleEntity.getId()), ProductDTO.class);
+
+        for (ProductDTO dto: productsDTOs) {
+            dto.add(linkTo(methodOn(ProductController.class)
+                    .findProductById(dto.getId()))
+                    .withSelfRel());
+        }
+
+        return productsDTOs;
     }
 
     @Override
     public List<ProductDTO> findProductsByReplenishmentId(Long id) {
-        var replenishment = replenishmentRepository.findById(id)
+        var replenishmentEntity = replenishmentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Replenishment not found"));
 
-        return parseListObjects(productRepository.findByReplenishmentId(replenishment.getId()), ProductDTO.class);
+        var productsDTOs = parseListObjects(
+                productRepository.findByReplenishmentId(replenishmentEntity.getId()), ProductDTO.class
+        );
+
+        for (ProductDTO dto: productsDTOs) {
+            dto.add(linkTo(methodOn(ProductController.class)
+                    .findProductById(id))
+                    .withSelfRel());
+        }
+        return productsDTOs;
     }
 
     @Override
     public ProductDTO createProductToReplenishment(Long replenishmentId, ProductDTO dto) {
-        var replenishment = replenishmentRepository.findById(replenishmentId)
+        var replenishmentEntity = replenishmentRepository.findById(replenishmentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Replenishment not found"));
 
-        var product = parseObject(dto, Product.class);
-        product.setReplenishment(replenishment);
+        var productEntity = parseObject(dto, Product.class);
+        productEntity.setReplenishment(replenishmentEntity);
 
-        return parseObject(productRepository.save(product), ProductDTO.class);
+        var productPersistedDTO =  parseObject(productRepository.save(productEntity), ProductDTO.class);
+        productPersistedDTO.add(linkTo(methodOn(ProductController.class)
+                .findProductById(productPersistedDTO.getId()))
+                .withSelfRel());
+
+        return productPersistedDTO;
     }
 
     @Override
     public ProductDTO createProductToSale(Long saleId, ProductDTO dto) {
-        var sale = saleRepository.findById(saleId)
+        var saleEntity = saleRepository.findById(saleId)
                 .orElseThrow(() -> new ResourceNotFoundException("Replenishment not found"));
 
-        var product = parseObject(dto, Product.class);
-        product.setSale(sale);
+        var productEntity = parseObject(dto, Product.class);
+        productEntity.setSale(saleEntity);
 
-        return parseObject(productRepository.save(product), ProductDTO.class);
+        var productPersistedDTO =  parseObject(productRepository.save(productEntity), ProductDTO.class);
+        productPersistedDTO.add(linkTo(methodOn(ProductController.class).
+                findProductById(productPersistedDTO.getId()))
+                .withSelfRel());
+
+        return productPersistedDTO;
     }
 
 
     @Override
     public ProductDTO update(ProductDTO dto) {
-        var product = productRepository.findById(dto.getId())
+        var productEntity = productRepository.findById(dto.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
 
-        product.setName(dto.getName());
-        product.setDescription(dto.getDescription());
-        product.setUnitType(dto.getUnitType());
-        product.setAmount(dto.getAmount());
-        product.setUnitValue(dto.getUnitValue());
+        productEntity.setName(dto.getName());
+        productEntity.setDescription(dto.getDescription());
+        productEntity.setUnitType(dto.getUnitType());
+        productEntity.setAmount(dto.getAmount());
+        productEntity.setUnitValue(dto.getUnitValue());
 
-        return parseObject(productRepository.save(product), ProductDTO.class);
+        var productPersistedDTO = parseObject(productRepository.save(productEntity), ProductDTO.class);
+        productPersistedDTO.add(linkTo(methodOn(ProductController.class)
+                .findProductById(productPersistedDTO.getId()))
+                .withSelfRel());
+
+        return productPersistedDTO;
     }
 
     @Override

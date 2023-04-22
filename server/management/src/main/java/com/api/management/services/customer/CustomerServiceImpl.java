@@ -38,16 +38,16 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Set<CustomerDTO> findCustomerSetByUserId(Long userId) {
-        var customerList = parseSetObjects(customerRepository.findByUserId(userId), CustomerDTO.class);
+    public Set<CustomerDTO> findCustomersByUserId(Long userId) {
+        var customersDTOs = parseSetObjects(customerRepository.findByUserId(userId), CustomerDTO.class);
 
-        for (CustomerDTO dto: customerList) {
+        for (CustomerDTO dto: customersDTOs) {
             dto.add(linkTo(methodOn(CustomerController.class)
                     .findById(dto.getId()))
                     .withSelfRel());
         }
 
-        return parseSetObjects(customerRepository.findByUserId(userId), CustomerDTO.class);
+        return customersDTOs;
     }
 
     @Override

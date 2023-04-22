@@ -1,17 +1,22 @@
 package com.api.management.services.sale;
 
+import com.api.management.controllers.SaleController;
 import com.api.management.dto.SaleDTO;
 import com.api.management.exceptions.ResourceNotFoundException;
 import com.api.management.models.Sale;
 import com.api.management.repositorys.CustomerRepository;
 import com.api.management.repositorys.SaleRepository;
-import com.api.management.util.mapper.UtilModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.api.management.util.constants.ErrorMessageConstants.CUSTOMER_NOT_FOUND_MSG;
+import static com.api.management.util.constants.ErrorMessageConstants.SALE_NOT_FOUND_MSG;
+import static com.api.management.util.mapper.UtilModelMapper.parseListObjects;
 import static com.api.management.util.mapper.UtilModelMapper.parseObject;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Service
 public class SaleServiceImpl implements SaleService{
@@ -23,50 +28,64 @@ public class SaleServiceImpl implements SaleService{
 
     @Override
     public SaleDTO findById(Long id) {
-        var entity = saleRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Sale not found"));
+        var saleEntity = saleRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format(SALE_NOT_FOUND_MSG, id)));
         
-        return parseObject(entity, SaleDTO.class);
+        var saleDTO = parseObject(saleEntity, SaleDTO.class);
+        saleDTO.add(linkTo(methodOn(SaleController.class).findById(id)).withSelfRel());
+        return saleDTO;
     }
 
     @Override
-    public List<SaleDTO> findListByCustomerId(Long id) {
+    public List<SaleDTO> findSalesByCustomerId(Long id) {
         var customerEntity = customerRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Customer not found"));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format(CUSTOMER_NOT_FOUND_MSG, id)));
 
-        var saleList= saleRepository.findByCustomerId(customerEntity.getId());
-        return UtilModelMapper.parseListObjects(saleList, SaleDTO.class);
+        var saleDTOs = parseListObjects(saleRepository.findByCustomerId(customerEntity.getId()), SaleDTO.class);
+
+        for (SaleDTO dto: saleDTOs) {
+            dto.add(linkTo(methodOn(SaleController.class)
+                    .findById(dto.getId()))
+                    .withSelfRel());
+        }
+
+        return saleDTOs;
     }
 
     @Override
     public SaleDTO create(Long customerId, SaleDTO dto) {
-        var entity = customerRepository.findById(customerId)
-                .orElseThrow(() -> new ResourceNotFoundException("Customer not found"));
+        var customerEntity = customerRepository.findById(customerId)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format(CUSTOMER_NOT_FOUND_MSG, customerId)));
 
         var saleEntity = parseObject(dto, Sale.class);
-        saleEntity.setCustomer(entity);
+        saleEntity.setCustomer(customerEntity);
 
-        return parseObject(saleRepository.save(saleEntity), SaleDTO.class);
+        var salePersistedDTO = parseObject(saleRepository.save(saleEntity), SaleDTO.class);
+        salePersistedDTO.add(linkTo(methodOn(SaleController.class).findById(salePersistedDTO.getId())).withSelfRel());
+        return salePersistedDTO;
     }
 
     @Override
     public SaleDTO update(SaleDTO dto) {
-        var entity = saleRepository.findById(dto.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Sale not found"));
+        var saleEntity = saleRepository.findById(dto.getId())
+                .orElseThrow(() -> new ResourceNotFoundException(String.format(SALE_NOT_FOUND_MSG, dto.getId())));
 
 
-        entity.setDeliveryStatus(dto.getDeliveryStatus());
-        entity.setPaymentStatus(dto.getPaymentStatus());
-        entity.setMoment(dto.getMoment());
-        entity.setTotalPrice(dto.getTotalPrice());
+        saleEntity.setDeliveryStatus(dto.getDeliveryStatus());
+        saleEntity.setPaymentStatus(dto.getPaymentStatus());
+        saleEntity.setMoment(dto.getMoment());
+        saleEntity.setTotalPrice(dto.getTotalPrice());
 
-        return parseObject(saleRepository.save(entity), SaleDTO.class);
+        var salePersistedDTO = parseObject(saleRepository.save(saleEntity), SaleDTO.class);
+        salePersistedDTO.add(linkTo(methodOn(SaleController.class).findById(salePersistedDTO.getId())).withSelfRel());
+        return salePersistedDTO;
+
     }
 
     @Override
     public void deleteById(Long id) {
         var entity = saleRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Sale not found"));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format(SALE_NOT_FOUND_MSG, id)));
 
         saleRepository.delete(entity);
     }

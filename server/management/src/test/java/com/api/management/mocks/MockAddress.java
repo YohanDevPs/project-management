@@ -12,8 +12,8 @@ public class MockAddress {
         return mockEntity(0);
     }
 
-    public AddressDTO mockVO() {
-        return mockVO(0);
+    public AddressDTO mockDTO() {
+        return mockDTO(0);
     }
 
     public List<Address> mockEntityList() {
@@ -24,10 +24,10 @@ public class MockAddress {
         return addresses;
     }
 
-    public List<AddressDTO> mockVOList() {
+    public List<AddressDTO> mockDTOList() {
         List<AddressDTO> addresses = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            addresses.add(mockVO(i));
+            addresses.add(mockDTO(i));
         }
         return addresses;
     }
@@ -46,7 +46,7 @@ public class MockAddress {
         return address;
     }
 
-    public AddressDTO mockVO(Integer number) {
+    public AddressDTO mockDTO(Integer number) {
         AddressDTO dto = new AddressDTO();
 
         dto.setId(number.longValue());

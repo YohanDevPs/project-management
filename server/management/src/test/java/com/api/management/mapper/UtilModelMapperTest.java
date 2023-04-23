@@ -6,7 +6,6 @@ import com.api.management.models.Address;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
 import static com.api.management.util.mapper.UtilModelMapper.parseListObjects;
 import static com.api.management.util.mapper.UtilModelMapper.parseObject;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -60,7 +59,7 @@ public class UtilModelMapperTest {
 
     @Test
     public void parseDTOToEntityTest() {
-        var output = parseObject(inputAddress.mockVO(), Address.class);
+        var output = parseObject(inputAddress.mockDTO(), Address.class);
         assertEquals(Long.valueOf(0L), output.getId());
         assertEquals("Street Fairview0", output.getStreet());
         assertEquals(0, output.getNumber());
@@ -72,7 +71,7 @@ public class UtilModelMapperTest {
 
     @Test
     public void parserDTOListToEntityListTest() {
-        var outputList = parseListObjects(inputAddress.mockVOList(), Address.class);
+        var outputList = parseListObjects(inputAddress.mockDTOList(), Address.class);
         var outputZero = outputList.get(0);
 
         assertEquals(Long.valueOf(0L), outputZero.getId());

@@ -10,12 +10,12 @@ import com.api.management.util.constants.ErrorMessageConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.util.List;
 
 import static com.api.management.util.constants.ErrorMessageConstants.ADDRESS_NOT_FOUND_MSG;
 import static com.api.management.util.constants.ErrorMessageConstants.CUSTOMER_NOT_FOUND_MSG;
+import static com.api.management.util.mapper.UtilModelMapper.parseListObjects;
 import static com.api.management.util.mapper.UtilModelMapper.parseObject;
-import static com.api.management.util.mapper.UtilModelMapper.parseSetObjects;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -38,8 +38,8 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Set<AddressDTO> findAddressSetByCustomerId(Long id) {
-        var listAddressDTO = parseSetObjects(addressRepository.findByCustomerId(id), AddressDTO.class);
+    public List<AddressDTO> findAddressSetByCustomerId(Long id) {
+        var listAddressDTO = parseListObjects(addressRepository.findByCustomerId(id), AddressDTO.class);
 
         for (AddressDTO dto :listAddressDTO) {
             dto.add(linkTo(methodOn(AddressController.class)
@@ -81,9 +81,9 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public void delete(Long addressId) {
-        var addressDTO = addressRepository.findById(addressId)
+        var address = addressRepository.findById(addressId)
                 .orElseThrow(() -> new ResourceNotFoundException(String.format(ErrorMessageConstants.ADDRESS_NOT_FOUND_MSG, addressId)));
 
-        addressRepository.delete(addressDTO);
+        addressRepository.delete(address);
     }
 }

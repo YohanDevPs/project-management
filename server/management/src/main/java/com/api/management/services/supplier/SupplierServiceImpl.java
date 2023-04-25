@@ -55,7 +55,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public SupplierDTO create(Long userId, SupplierDTO dto) {
         var userEntity = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException(String.format(USER_NOT_FOUND_MSG, userId)));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format(USER_NOT_FOUND_MSG, userId)));
 
         var supplierEntity = parseObject(dto, Supplier.class);
         supplierEntity.setUser(userEntity);

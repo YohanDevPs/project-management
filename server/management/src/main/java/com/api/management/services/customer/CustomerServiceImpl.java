@@ -69,7 +69,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDTO update(CustomerDTO dto) {
         var entity = customerRepository.findById(dto.getId())
-                .orElseThrow(() -> new UserNotFoundException(String.format(CUSTOMER_NOT_FOUND_MSG, dto.getId())));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format(CUSTOMER_NOT_FOUND_MSG, dto.getId())));
 
         entity.setName(dto.getName());
         entity.setEmail(dto.getEmail());
@@ -83,7 +83,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void deleteByCustomerId(Long id) {
         var entity = customerRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException(String.format(CUSTOMER_NOT_FOUND_MSG, id)));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format(CUSTOMER_NOT_FOUND_MSG, id)));
 
         customerRepository.delete(entity);
     }

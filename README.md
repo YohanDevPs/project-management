@@ -1,8 +1,8 @@
 # Em construção :hammer:
 
 # Objetivo
-- Desenvolver uma aplicação de gerenciamento de vendas e abastecimento para micros empreendedores, com geração de relatorios, status de pagamento e entrega e geração de relatórios.
-- Oferecer oportunidade de desenvolvimento profissional e neetwork entre os membros da equipe.
+- Desenvolver uma aplicação de gerenciamento de vendas e abastecimento para micros empreendedores. Aqui estão algumas funcionalidades: filtros de clientes e fornecedores por status de pagamento e entrega, geração de relatórios e emissao de notas.
+- Oferecer oportunidade de desenvolvimento profissional, portifolio e neetwork entre os membros da equipe.
 
 # Projeto
 
@@ -16,7 +16,7 @@
 - Migrations com Flyway 
 - Implementação de testes de integração com Rest assured e Testcontainers
 - Implementação de autentificação de usuarios com Spring Security
-- Desenvolver Relatorios com JasperReports
+- Desenvolver Relatórios com JasperReports
 - Implementar busca paginada
 - Dockerização
 - Implementar na AWS

@@ -27,4 +27,7 @@
 
 
 
+### Banco de dados nesse momento (Será reorganizado e modificado com o tempo)
 
+
+![image](https://user-images.githubusercontent.com/87953006/234709651-41887f7e-a2b3-4ca9-885c-d38d0274339c.png)

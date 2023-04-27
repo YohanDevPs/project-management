@@ -1,12 +1,33 @@
 # Em construção :hammer:
 
 # Objetivo
-
-- Criar um projeto sem fim lucrativo, com intuito de elevar meus conhecimentos teoricos e praticos sobre tecnologias amplamente utilizadas no meio de Desenvolvimento com Java e Spring Boot. 
+- Desenvolver uma aplicação de gerenciamento de vendas e abastecimento para micros empreendedores. Aqui estão algumas funcionalidades: filtros de clientes e fornecedores por status de pagamento e entrega, geração de relatórios e emissao de notas.
+- Oferecer oportunidade de desenvolvimento profissional, portifolio e neetwork entre os membros da equipe.
 
 # Projeto
 
-- Aplicação simples de gerenciamento de negocios, com possibilidade de cadastro de fornecedores e clientes assim como a gestão das vendas e fornecimento de mercadoria (por enquanto sem estoque). Alem disso, tambem adicionarei filtros para geração de relatotorios com JasperReports.
+## Tecnologias e status de implementação 
+### Back-end
+- Java 17 :white_check_mark:
+- Spring Boot 3.0.2 :white_check_mark:
+- Arquitetura RESTful :white_check_mark:
+- Integração com MySql :white_check_mark:
+- Testes com JUnit 5 e Mockito
+- Migrations com Flyway 
+- Implementação de testes de integração com Rest assured e Testcontainers
+- Implementação de autentificação de usuarios com Spring Security
+- Desenvolver Relatórios com JasperReports
+- Implementar busca paginada
+- Dockerização
+- Implementar na AWS
+
+### Front-end (Necessário definir desenvolvedor)
+
+- Será desenvolvido em Angular.
 
 
 
+### Banco de dados nesse momento (Será reorganizado e modificado com o tempo)
+
+
+![image](https://user-images.githubusercontent.com/87953006/234709651-41887f7e-a2b3-4ca9-885c-d38d0274339c.png)

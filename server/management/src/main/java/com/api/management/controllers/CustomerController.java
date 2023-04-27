@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
+import java.util.List;
 
 import static com.api.management.util.constants.UtilMediaType.*;
 
@@ -20,7 +20,7 @@ public class CustomerController {
     @GetMapping(value = "/allByUser/{userId}",
             produces = { APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
     @ResponseStatus(HttpStatus.OK)
-    public Set<CustomerDTO> findAllByUserId(@PathVariable("userId") Long userId) {
+    public List<CustomerDTO> findAllByUserId(@PathVariable("userId") Long userId) {
         return customerService.findCustomersByUserId(userId);
     }
 

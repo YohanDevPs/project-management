@@ -67,7 +67,7 @@ public class AddressServiceTest {
     }
 
     @Test
-    void testFindAddressSetByCustomerId() {
+    void testFindAddressesByCustomerId() {
         var addresses = inputAddress.mockEntityList();
         var customerId = 1L;
 

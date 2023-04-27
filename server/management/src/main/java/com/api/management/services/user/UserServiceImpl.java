@@ -2,7 +2,6 @@ package com.api.management.services.user;
 
 import com.api.management.dto.UserDTO;
 import com.api.management.exceptions.ResourceNotFoundException;
-import com.api.management.exceptions.UserNotFoundException;
 import com.api.management.models.User;
 import com.api.management.repositorys.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

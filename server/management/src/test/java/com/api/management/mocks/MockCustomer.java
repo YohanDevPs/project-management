@@ -25,11 +25,11 @@ public class MockCustomer {
     }
 
     public List<CustomerDTO> mockDTOList() {
-        List<CustomerDTO> addresses = new ArrayList<>();
+        List<CustomerDTO> customerDTOS = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            addresses.add(mockDTO(i));
+            customerDTOS.add(mockDTO(i));
         }
-        return addresses;
+        return customerDTOS;
     }
 
     public Customer mockEntity(Integer number) {
@@ -37,7 +37,7 @@ public class MockCustomer {
 
         customer.setId(number.longValue());
         customer.setName("Yohan" + number);
-        customer.setName("yohan@email.com"+number);
+        customer.setEmail("yohan@email.com"+number);
         customer.setPhone("7188374819"+number);
 
         return customer;
@@ -48,7 +48,7 @@ public class MockCustomer {
 
         customerDTO.setId(number.longValue());
         customerDTO.setName("Yohan" + number);
-        customerDTO.setName("yohan@email.com"+number);
+        customerDTO.setEmail("yohan@email.com"+number);
         customerDTO.setPhone("7188374819"+number);
 
         return customerDTO;

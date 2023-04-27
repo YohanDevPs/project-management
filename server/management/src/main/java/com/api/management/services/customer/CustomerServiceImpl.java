@@ -3,19 +3,18 @@ package com.api.management.services.customer;
 import com.api.management.controllers.CustomerController;
 import com.api.management.dto.CustomerDTO;
 import com.api.management.exceptions.ResourceNotFoundException;
-import com.api.management.exceptions.UserNotFoundException;
 import com.api.management.models.Customer;
 import com.api.management.repositorys.CustomerRepository;
 import com.api.management.repositorys.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.util.List;
 
 import static com.api.management.util.constants.ErrorMessageConstants.CUSTOMER_NOT_FOUND_MSG;
 import static com.api.management.util.constants.ErrorMessageConstants.USER_NOT_FOUND_MSG;
+import static com.api.management.util.mapper.UtilModelMapper.parseListObjects;
 import static com.api.management.util.mapper.UtilModelMapper.parseObject;
-import static com.api.management.util.mapper.UtilModelMapper.parseSetObjects;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -38,8 +37,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Set<CustomerDTO> findCustomersByUserId(Long userId) {
-        var customersDTOs = parseSetObjects(customerRepository.findByUserId(userId), CustomerDTO.class);
+    public List<CustomerDTO> findCustomersByUserId(Long userId) {
+        var customersDTOs = parseListObjects(customerRepository.findByUserId(userId), CustomerDTO.class);
 
         for (CustomerDTO dto: customersDTOs) {
             dto.add(linkTo(methodOn(CustomerController.class)

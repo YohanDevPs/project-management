@@ -3,7 +3,6 @@ package com.api.management.services.supplier;
 import com.api.management.controllers.SupplierController;
 import com.api.management.dto.SupplierDTO;
 import com.api.management.exceptions.ResourceNotFoundException;
-import com.api.management.exceptions.UserNotFoundException;
 import com.api.management.models.Supplier;
 import com.api.management.repositorys.SupplierRepository;
 import com.api.management.repositorys.UserRepository;

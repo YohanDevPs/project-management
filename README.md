@@ -27,7 +27,6 @@
 
 ### Alguns Wireframes - Por:  [Gabriel de Matos](https://www.linkedin.com/in/gabrielmatos0/)
 
-
 <details>
   <summary>Clique aqui para ver a lista de clientes</summary>
   
@@ -47,7 +46,11 @@
 </details>
 
 
-### Banco de dados nesse momento (Será reorganizado e modificado com o tempo)
-
-
+### Diagrama do banco de dados nesse momento (Será reorganizado e modificado com o tempo)
+<details>
+  <summary>Clique aqui para ver o diagrama</summary>
+  
 ![image](https://user-images.githubusercontent.com/87953006/234709651-41887f7e-a2b3-4ca9-885c-d38d0274339c.png)
+</details>
+
+

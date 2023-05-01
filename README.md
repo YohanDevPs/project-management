@@ -1,4 +1,4 @@
-# Em construção :hammer:
+# Status: Prototipagem :hammer:
 
 # Objetivo
 - Desenvolver uma aplicação de gerenciamento de vendas e abastecimento para micros empreendedores. Aqui estão algumas funcionalidades: filtros de clientes e fornecedores por status de pagamento e entrega, geração de relatórios e emissao de notas.
@@ -6,7 +6,9 @@
 
 # Projeto
 
-## Tecnologias e status de implementação 
+Aplicação simples de gerenciamento de negocios, com possibilidade de cadastro de fornecedores e clientes, gestão das vendas e fornecimento de mercadoria, filtros sobre status de pagamento e clientes com base em seus atributos e geração de relatórios.
+
+
 ### Back-end
 - Java 17 :white_check_mark:
 - Spring Boot 3.0.2 :white_check_mark:

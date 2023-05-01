@@ -27,7 +27,7 @@ Aplicação simples de gerenciamento de negocios, com possibilidade de cadastro 
 
 - Será desenvolvido em Angular.
 
-### Alguns Wireframes - Por:  [Gabriel de Matos](https://www.linkedin.com/in/gabrielmatos0/)
+### Alguns Wireframes - Por:  [Gabriel de Matos](https://www.behance.net/gabrieldematos)
 
 <details>
   <summary>Clique aqui para ver a lista de clientes</summary>

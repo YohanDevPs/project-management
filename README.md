@@ -21,10 +21,30 @@
 - Dockerização
 - Implementar na AWS
 
-### Front-end (Necessário definir desenvolvedor)
+### Front-end (Não iniciado)
 
 - Será desenvolvido em Angular.
 
+### Alguns Wireframes - Por:  [Gabriel de Matos](https://www.linkedin.com/in/gabrielmatos0/)
+
+
+<details>
+  <summary>Clique aqui para ver a lista de clientes</summary>
+  
+![image](https://user-images.githubusercontent.com/87953006/235389671-b8465326-457f-43c5-86a9-e683aa437283.png)
+</details>
+
+<details>
+  <summary>Clique aqui para ver a Login</summary>
+  
+![image](https://user-images.githubusercontent.com/87953006/235389717-9c211e45-cf2c-4424-8b98-40db3a158328.png)
+</details>
+
+<details>
+  <summary>Clique aqui para ver a lista de produtos</summary>
+  
+ ![image](https://user-images.githubusercontent.com/87953006/235389769-eb49ac7a-33d5-44b0-9962-82efbc91f6ee.png)
+</details>
 
 
 ### Banco de dados nesse momento (Será reorganizado e modificado com o tempo)

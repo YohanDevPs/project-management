@@ -4,10 +4,18 @@
 - Desenvolver uma aplicação de gerenciamento de vendas e abastecimento para micros empreendedores. Aqui estão algumas funcionalidades: filtros de clientes e fornecedores por status de pagamento e entrega, geração de relatórios e emissao de notas.
 - Oferecer oportunidade de desenvolvimento profissional, portifolio e neetwork entre os membros da equipe.
 
-# Projeto
-
-Aplicação simples de gerenciamento de negocios, com possibilidade de cadastro de fornecedores e clientes, gestão das vendas e fornecimento de mercadoria, filtros sobre status de pagamento e clientes com base em seus atributos e geração de relatórios.
-
+### Funcionalidades
+  
+- Cadastro/ deleção/ atualização/ listar e achar um de cliente
+- Cadastro/ deleção/ atualização do endereço do cliente (cliente pode ter mais de um endereço talvez devemos listar os endereços, mais não é importante, design decide)
+- Cadastro/ deleção/ atualização/ listar e achar uma venda do cliente
+- **Recursos de filtros dos clientes (Resgatar bom cliente = (período entre data inicial e final) AND (valor total de compras durante o período), além de outros filtros, status de pagamento e etc.**
+- Adicionar/atualizar/deletar e achar estoques, será possível vender para cliente quando retirar de estoque, assim como devemos adicionar no estoque em reabastecimento.
+- Relatórios sobre os custos de vendas e compras
+- Cadastro/ deleção/ atualização/ listar e achar fornecedores.
+- Cadastro/ deleção/ atualização/ listar e achar operações de abastecimentos dos fornecedores.
+- **Chat com cliente, abrir chat do WhatsApp.**
+- **Definir como será tratada inconsistência de dados.**
 
 ### Back-end
 - Java 17 :white_check_mark:
